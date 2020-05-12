@@ -2,7 +2,7 @@
 Algoritmo para recorrer arbol cuaternario
 
 recorrer(Nodo r){
-	if(r instanceof padre){
+	if(r instanceof NodoPadre){
 		dividir();
 		if(r.getNW != null){
 			recorrer(r.getNW);
