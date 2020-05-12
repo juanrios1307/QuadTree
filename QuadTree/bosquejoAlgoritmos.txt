@@ -1,0 +1,39 @@
+	
+Algoritmo para recorrer arbol cuaternario
+
+recorrer(Nodo r){
+	if(r instanceof padre){
+		dividir();
+		if(r.getNW != null){
+			recorrer(r.getNW);
+		}
+		if(r.getNE != null){
+			recorrer(r.getNE);
+		}
+		if(r.getSE != null){
+			recorrer(r.getSE);
+		}
+		if(r.getSW != null){
+			recorrer(r.getSW);
+		}
+	}else{
+		pintar(r);
+	}
+}
+
+pintar(r){
+	int pos=r.getUbicacion();
+	//aqui se pinta la imagen
+}
+
+dividir(){
+	//se va a poner cuadricula del archivo que se renderizara en la interfaz
+}
+
+insertar(Nodo r){
+
+}
+
+eliminar(Nodo r){
+
+}
