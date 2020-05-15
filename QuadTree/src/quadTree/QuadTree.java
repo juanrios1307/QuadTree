@@ -1,8 +1,5 @@
 package quadTree;
 
-import java.awt.Color;
-import java.awt.GridLayout;
-
 public class QuadTree {
 	
 	
@@ -12,17 +9,15 @@ public class QuadTree {
 		this.root=root;
 	}
 	
-	public Color get(int x,int y) {
-		return Color.black;
+	public int getAltura() {
+		return root.getAltura();
 	}
 	
 	public Nodo getRoot() {	
 		return root;
 	}
-	
-	public void setRoot(Nodo root) {
-		this.root=root;
-	}
+
+
 	
 	public void recorrer(Nodo r) throws ExceptionNodo{
 		if(r instanceof NodoPadre){
@@ -54,9 +49,7 @@ public class QuadTree {
 
 	}
 
-	public int getAltura() {
-		return root.getAltura();
-	}
+	
 
 	
 }

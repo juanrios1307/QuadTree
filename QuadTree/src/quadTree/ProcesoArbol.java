@@ -48,9 +48,11 @@ public class ProcesoArbol extends JFrame{
 				img.getSubimage(i, j, 4, 4).getRGB(i+2, j+2);
 			}
 		}
+	
 		
 		return null;
 	}
+	
 	
 	public void procesarArbol(QuadTree arbol) throws ExceptionNodo {
 		int px=(int) Math.pow(2, arbol.getAltura());
@@ -60,10 +62,11 @@ public class ProcesoArbol extends JFrame{
 	
 	public void recorrerArbol(Nodo r,int h) throws ExceptionNodo{
 		
-		//int lado=(int)Math.pow(2, r.getAltura());
+		int lado=(int)Math.pow(2, r.getAltura())*20;
 		if(r instanceof NodoPadre){
 
 			dividir(r.getRect().getX(), r.getRect().getY(), r.getRect().getLado());
+			//dividir(r.getRect().getX(), r.getRect().getY(), lado);
 			
 			NodoPadre aux=(NodoPadre)r;
 			if(aux.getNw() != null){
@@ -85,6 +88,7 @@ public class ProcesoArbol extends JFrame{
 		}else{
 			NodoHoja aux=(NodoHoja)r;
 			pintar(aux.getRect().getX(),aux.getRect().getY(),aux.getRect().getLado(),aux.getColor());
+			//pintar(aux.getRect().getX(),aux.getRect().getY(),lado/2,aux.getColor());
 		}
 	}
 	
@@ -141,6 +145,11 @@ public class ProcesoArbol extends JFrame{
 		NodoPadre h30=new NodoPadre(new Rectangulo(100, 100, 160),h20,h21,h22,h23);
 		
 		QuadTree arbol=new QuadTree(h30);
+		
+		System.out.println(h30.getAltura());
+		System.out.println(h20.getAltura());
+		System.out.println(h11.getAltura());
+		System.out.println(h22.getAltura());
 		
 		return arbol;
 		
