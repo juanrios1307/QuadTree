@@ -8,38 +8,38 @@ import javax.swing.JFrame;
 
 import interfaz.InterfazFigura;
 
-public class ArbolToImagen extends JFrame{
+public class ProcesosArbol extends JFrame{
 	
 	Graphics G;
 	static QuadTree arbol;
 	
-	
-	public ArbolToImagen(Graphics G) {
+	public ProcesosArbol(Graphics G) {
 		this.G=G;
 	}
 	
+	public ProcesosArbol() {
+	}
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                	arbol=crearArbolPrueba();
-                	InterfazFigura frame = new InterfazFigura(arbol);
-                    frame.setVisible(true);      
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+	public QuadTree imagenToArbol(BufferedImage img) {
+		int px=img.getHeight();
+		
+		for (int i = 0; i < px/4; i+=4) {
+			for (int j = 0; j < px/4; j+=4) {
+				img.getSubimage(i, j, 4, 4).getRGB(i+2, j+2);
+			}
+		}
+	
+		
+		return null;
 	}
 
-	public void procesarArbol(QuadTree arbol) throws ExceptionNodo {
+	public void arbolToImagen(QuadTree arbol) throws ExceptionNodo {
 		int px=(int) Math.pow(2, arbol.getAltura());
 		
-		recorrerArbol(arbol.getRoot(),arbol.getAltura());
+		arbolToImagen(arbol.getRoot(),arbol.getAltura());
 	}
 	
-	public void recorrerArbol(Nodo r,int h) throws ExceptionNodo{
+	public void arbolToImagen(Nodo r,int h) throws ExceptionNodo{
 		
 		int lado=(int)Math.pow(2, r.getAltura())*20;
 		if(r instanceof NodoPadre){
@@ -49,25 +49,25 @@ public class ArbolToImagen extends JFrame{
 			
 			NodoPadre aux=(NodoPadre)r;
 			if(aux.getNw() != null){
-				recorrerArbol(aux.getNw(),h);
+				arbolToImagen(aux.getNw(),h);
 				
 			}
 			if(aux.getNe() != null){
-				recorrerArbol(aux.getNe(), h);
+				arbolToImagen(aux.getNe(), h);
 				
 			}
 			if(aux.getSe() != null){
-				recorrerArbol(aux.getSe(),h);
+				arbolToImagen(aux.getSe(),h);
 				
 			}
 			if(aux.getSw() != null){
-				recorrerArbol(aux.getSw(),h);
+				arbolToImagen(aux.getSw(),h);
 				
 			}
 		}else{
 			NodoHoja aux=(NodoHoja)r;
 			pintar(aux.getRect().getX(),aux.getRect().getY(),aux.getRect().getLado(),aux.getColor());
-			//pintar(aux.getRect().getX(),aux.getRect().getY(),lado/2,aux.getColor());
+			
 		}
 	}
 	
@@ -97,7 +97,7 @@ public class ArbolToImagen extends JFrame{
 		
 
 		
-		NodoHoja h00=new NodoHoja(new Rectangulo(140, 100, 20), Color.red);
+		NodoHoja h00=new NodoHoja(new Rectangulo(140, 100, 20), new Color(250,0,0));
 		NodoHoja h01=new NodoHoja(new Rectangulo(160, 100, 20), Color.black);
 		NodoHoja h02=new NodoHoja(new Rectangulo(160, 120, 20), Color.green);
 		NodoHoja h03=new NodoHoja(new Rectangulo(140, 120, 20), Color.PINK);
