@@ -1,11 +1,11 @@
 package quadTree;
 
-public class nodoPadre extends Nodo{
+public class NodoPadre extends Nodo{
 	
 	private Nodo nw,ne,se,sw;
 
-	public nodoPadre(Rectangulo rectan, int altura, Nodo nw, Nodo ne, Nodo se, Nodo sw) {
-		super(rectan, altura);
+	public NodoPadre(Rectangulo rect, Nodo nw, Nodo ne, Nodo se, Nodo sw) {
+		super(rect);
 		this.nw = nw;
 		this.ne = ne;
 		this.se = se;
@@ -43,6 +43,7 @@ public class nodoPadre extends Nodo{
 	public void setSw(Nodo sw) {
 		this.sw = sw;
 	}
+	
 	
 	
 

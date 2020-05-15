@@ -1,8 +1,20 @@
 package quadTree;
 
-public class QuadTree {
+import java.awt.Color;
+import java.awt.GridLayout;
 
-	private Nodo root=new Nodo();
+public class QuadTree {
+	
+	
+	private Nodo root;
+	
+	public QuadTree(Nodo root) {
+		this.root=root;
+	}
+	
+	public Color get(int x,int y) {
+		return Color.black;
+	}
 	
 	public Nodo getRoot() {	
 		return root;
@@ -16,17 +28,17 @@ public class QuadTree {
 		if(r instanceof NodoPadre){
 			
 			NodoPadre aux=(NodoPadre)r;
-			if(aux.getNW() != null){
-				recorrer(aux.getNW());
+			if(aux.getNw() != null){
+				recorrer(aux.getNw());
 			}
-			if(aux.getNE() != null){
-				recorrer(aux.getNE());
+			if(aux.getNe() != null){
+				recorrer(aux.getNe());
 			}
-			if(aux.getSE() != null){
-				recorrer(aux.getSE());
+			if(aux.getSe() != null){
+				recorrer(aux.getSe());
 			}
-			if(aux.getSW() != null){
-				recorrer(aux.getSW());
+			if(aux.getSw() != null){
+				recorrer(aux.getSw());
 			}
 		}else{
 			System.out.println(((NodoHoja) r).getColor());
@@ -43,11 +55,8 @@ public class QuadTree {
 	}
 
 	public int getAltura() {
-		return 0;
+		return root.getAltura();
 	}
-	
-	public static void main(String[] args) {
-		
-	}
+
 	
 }

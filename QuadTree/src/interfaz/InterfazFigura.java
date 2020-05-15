@@ -5,29 +5,14 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-import quadTree.ProcesoArbol;
+import quadTree.*;
 
 public class InterfazFigura extends JFrame {
 	private JPanel contentPane;
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    InterfazFigura frame = new InterfazFigura();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
+    QuadTree arbol;
  
-    public InterfazFigura() {
+    public InterfazFigura(QuadTree arbol) {
     	 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          setBounds(100, 100, 450, 300);
          contentPane = new JPanel();
@@ -35,15 +20,22 @@ public class InterfazFigura extends JFrame {
          setContentPane(contentPane);
          contentPane.setLayout(null);
          setBounds(0,0,800,600);
-        
-       /*;*/
+         
+         this.arbol=arbol;
+
     }
     
     public void paint (Graphics g)
     {
   
         ProcesoArbol figura=new ProcesoArbol(contentPane.getGraphics());
-        figura.dividir(100, 100, 80);
+        try {
+			figura.procesarArbol(arbol);
+		} catch (ExceptionNodo e) {
+			e.printStackTrace();
+		}
+        
+       /* figura.dividir(100, 100, 80);
         figura.dividir(100, 100, 40);
         
         figura.pintar(100, 100, 20, Color.green);
@@ -65,7 +57,7 @@ public class InterfazFigura extends JFrame {
         figura.pintar(160, 160, 20, Color.green);
         figura.pintar(140, 160, 20, Color.red);
         
-        figura.pintar(100, 140, 40, Color.CYAN);
+        figura.pintar(100, 140, 40, Color.CYAN);*/
         
       
     }

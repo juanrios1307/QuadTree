@@ -2,14 +2,13 @@ package quadTree;
 
 public class Rectangulo {
 	
-	private int x,y,h,w;
+	private int x,y,lado;
 
-	public Rectangulo(int x, int y, int h, int w) {
+	public Rectangulo(int x, int y, int l) {
 		super();
 		this.x = x;
 		this.y = y;
-		this.h = h;
-		this.w = w;
+		this.lado=l;
 	}
 
 	public int getX() {
@@ -28,22 +27,13 @@ public class Rectangulo {
 		this.y = y;
 	}
 
-	public int getH() {
-		return h;
+	public int getLado() {
+		return lado;
 	}
 
-	public void setH(int h) {
-		this.h = h;
+	public void setLado(int h) {
+		this.lado = h;
 	}
-
-	public int getW() {
-		return w;
-	}
-
-	public void setW(int w) {
-		this.w = w;
-	}
-	
 	
 
 }

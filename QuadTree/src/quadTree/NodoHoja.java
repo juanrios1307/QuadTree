@@ -2,12 +2,12 @@ package quadTree;
 
 import java.awt.Color;
 
-public class nodoHoja extends Nodo {
+public class NodoHoja extends Nodo {
 
 	Color color;
 
-	public nodoHoja(Rectangulo rectan, int altura, Color color) {
-		super(rectan, altura);
+	public NodoHoja(Rectangulo rect, Color color) {
+		super(rect);
 		this.color = color;
 	}
 
