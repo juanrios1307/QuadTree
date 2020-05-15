@@ -1,9 +1,13 @@
 package quadTree;
 
+import java.awt.Color;
+
 public class NodoHoja extends Nodo{
 	
-	public int getColor() {
+	public Color getColor() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Color.black;
 	}
+	
+	
 }

@@ -1,62 +1,92 @@
 package quadTree;
 
-import java.awt.image.BufferedImage;
 
-public class ProcesoArbol {
+import java.awt.*;
+import java.awt.image.*;
 
+import javax.swing.JFrame;
+
+public class ProcesoArbol extends JFrame{
 	
-	public static void procesarImagen() {
+	Graphics G;
+	
+	public ProcesoArbol(Graphics G) {
+		this.G=G;
 		
 	}
 	
-	public static void procesarArbol(QuadTree arbol) throws ExceptionNodo {
+	
+	public void procesarImagen(BufferedImage img) {
+		int px=img.getHeight();
+		
+		
+		
+		for (int i = 0; i < px/4; i+=4) {
+			for (int j = 0; j < px/4; j+=4) {
+				img.getSubimage(i, j, 4, 4).getRGB(i+2, j+2);
+			}
+		}
+	}
+	
+	public void procesarArbol(QuadTree arbol) throws ExceptionNodo {
 		int px=(int) Math.pow(2, arbol.getAltura());
-		BufferedImage img=new BufferedImage(px, px, 1);
 		
-		recorrerArbol(0,0,img,arbol.getRoot(),arbol.getAltura());
+		recorrerArbol(arbol.getRoot(),arbol.getAltura());
 	}
 	
-	public static void recorrerArbol(int x,int y,BufferedImage img,Nodo r,int h) throws ExceptionNodo{
+	public void recorrerArbol(Nodo r,int h) throws ExceptionNodo{
 		
-		int lado=(int)Math.pow(2, h-r.getAltura());
+		int lado=(int)Math.pow(2, r.getAltura());
 		if(r instanceof NodoPadre){
-			
-			
-			dividir(img.getSubimage(x, y, lado, lado));
+
+			dividir(r.getX(), r.getY(), lado);
 			
 			NodoPadre aux=(NodoPadre)r;
 			if(aux.getNW() != null){
-				recorrerArbol(x,y,img,aux.getNW(),h);
-				x+=4;
+				recorrerArbol(aux.getNW(),h);
+				
 			}
 			if(aux.getNE() != null){
-				recorrerArbol(x,y,img,aux.getNE(), h);
-				y+=4;
+				recorrerArbol(aux.getNE(), h);
+				
 			}
 			if(aux.getSE() != null){
-				recorrerArbol(x,y,img,aux.getSE(),h);
-				x-=4;
+				recorrerArbol(aux.getSE(),h);
+				
 			}
 			if(aux.getSW() != null){
-				recorrerArbol(x,y,img,aux.getSW(),h);
+				recorrerArbol(aux.getSW(),h);
 				
 			}
 		}else{
-			pintar(img.getSubimage(x, y, lado, lado),(NodoHoja) r);
+			NodoHoja aux=(NodoHoja)r;
+			pintar(aux.getX(),aux.getY(),lado/2,aux.getColor());
 		}
 	}
 	
 	
-	public static void pintar(BufferedImage img,NodoHoja r) {
-		//este metodo va a pintar de un color el cuadro correspondiente
+	public Graphics pintar(int x,int y,int l,Color color) {
+		super.paint(G);
+		G.setColor(color);
+		G.fillRect(x, y, l, l);
 		
-		
-		img.setRGB(0, 0, r.getColor());
+		return G;
 	}
 	
-	public static void dividir(BufferedImage img){
+	public Graphics dividir(int x,int y,int l){
 		//se va a poner cuadricula de la imagen
+		super.paint(G);
+		G.setColor(Color.black);
+		G.drawRect(x, y, l, l);
+		
+		G.drawLine(x, y+l/2, x+l, y+l/2);
+		
+		G.drawLine(x+l/2, y, x+l/2, y+l);
+		
+		return G;
 	}
+
+	
 
 	
 	
