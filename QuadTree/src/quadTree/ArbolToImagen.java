@@ -8,23 +8,16 @@ import javax.swing.JFrame;
 
 import interfaz.InterfazFigura;
 
-public class ProcesoArbol extends JFrame{
+public class ArbolToImagen extends JFrame{
 	
 	Graphics G;
 	static QuadTree arbol;
 	
 	
-	public ProcesoArbol(Graphics G) {
+	public ArbolToImagen(Graphics G) {
 		this.G=G;
 	}
 	
-	/*public ProcesoArbol(BufferedImage img) {
-		ProcesoArbol.arbol=procesarImagen(img);
-		
-		InterfazFigura frame = new InterfazFigura(arbol);
-        frame.setVisible(true);
-        
-	}*/
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -39,21 +32,7 @@ public class ProcesoArbol extends JFrame{
             }
         });
 	}
-	
-	public QuadTree procesarImagen(BufferedImage img) {
-		int px=img.getHeight();
-		
-		for (int i = 0; i < px/4; i+=4) {
-			for (int j = 0; j < px/4; j+=4) {
-				img.getSubimage(i, j, 4, 4).getRGB(i+2, j+2);
-			}
-		}
-	
-		
-		return null;
-	}
-	
-	
+
 	public void procesarArbol(QuadTree arbol) throws ExceptionNodo {
 		int px=(int) Math.pow(2, arbol.getAltura());
 		

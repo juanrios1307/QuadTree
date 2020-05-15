@@ -25,7 +25,7 @@ public class InterfazFigura extends JFrame {
     }
     
     public void paint (Graphics g){
-        ProcesoArbol figura=new ProcesoArbol(contentPane.getGraphics());
+        ArbolToImagen figura=new ArbolToImagen(contentPane.getGraphics());
         try {
 			figura.procesarArbol(arbol);
 		} catch (ExceptionNodo e) {
