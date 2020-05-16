@@ -19,6 +19,7 @@ public class Nodo {
 		super();
 		this.rect = rect;
 		this.color = color;
+		this.hoja=true;
 	}
 
 	// -----------------------------------------------------------------------------------------------------

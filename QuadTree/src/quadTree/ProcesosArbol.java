@@ -49,9 +49,9 @@ public class ProcesosArbol extends JFrame{
 	}
 
 	public void arbolToImagen(QuadTree arbol) throws ExceptionNodo {
-		/*int px=(int) Math.pow(2, arbol.getAltura());
+		//int px=(int) Math.pow(2, arbol.getAltura());
 		
-		arbolToImagen(arbol.getRoot(),arbol.getAltura());*/
+		arbolToImagen(arbol.getRoot(),2);
 	}
 	
 	public void arbolToImagen(Nodo r,int h) throws ExceptionNodo{
@@ -118,12 +118,21 @@ public class ProcesosArbol extends JFrame{
 		Nodo h03=new Nodo(new Rectangulo(140, 120, 20), Color.PINK);
 		
 		Nodo h10=new Nodo(new Rectangulo(100, 100, 40),Color.green);
-		//Nodo h11=new Nodo(new Rectangulo(140, 100, 40), h00, h01, h02, h03);
+		
+		Nodo h11=new Nodo(new Rectangulo(140, 100, 40));
+		h11.setNw(h00);
+		h11.setNe(h01);
+		h11.setSe(h02);
+		h11.setSw(h03);
 		
 		Nodo h12=new Nodo(new Rectangulo(140, 140, 40),Color.red);
 		Nodo h13=new Nodo(new Rectangulo(100, 140, 40),Color.pink);
 		
-		//Nodo h20=new Nodo(new Rectangulo(100, 100, 80), h10, h11, h12, h13);
+		Nodo h20=new Nodo(new Rectangulo(100, 100, 80));
+		h20.setNw(h10);
+		h20.setNe(h11);
+		h20.setSe(h12);
+		h20.setSw(h13);
 		
 		Nodo h21=new Nodo(new Rectangulo(180,100,80),Color.pink);
 		
@@ -132,13 +141,22 @@ public class ProcesosArbol extends JFrame{
 		Nodo h16=new Nodo(new Rectangulo(220, 220, 40),Color.green);
 		Nodo h17=new Nodo(new Rectangulo(180, 220, 40),Color.red);
 		
-		//Nodo h22=new Nodo(new Rectangulo(180, 180, 80), h14, h15, h16, h17);
+		Nodo h22=new Nodo(new Rectangulo(180, 180, 80));
+		h22.setNw(h14);
+		h22.setNe(h15);
+		h22.setSe(h16);
+		h22.setSw(h17);
 		
 		Nodo h23=new Nodo(new Rectangulo(100,180,80),Color.cyan);
 		
-		//Nodo h30=new Nodo(new Rectangulo(100, 100, 160),h20,h21,h22,h23);
+		Nodo h30=new Nodo(new Rectangulo(100, 100, 160));
+		h30.setNw(h20);
+		h30.setNe(h21);
+		h30.setSe(h22);
+		h30.setSw(h23);
 		
-		QuadTree arbol=new QuadTree(h23);
+		
+		QuadTree arbol=new QuadTree(h30);
 		
 		
 		
