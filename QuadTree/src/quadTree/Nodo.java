@@ -6,10 +6,9 @@ public class Nodo {
 	private int altura;
 	private NodoPadre padre;
 
-	public Nodo(Rectangulo rect, int altura, NodoPadre padre) {
+	public Nodo(Rectangulo rect, NodoPadre padre) {
 		super();
 		this.rect = rect;
-		this.altura = altura;
 		this.padre = padre;
 	}
 
@@ -67,14 +66,12 @@ public class Nodo {
 	public int nivelNodo(Nodo e) {
 		int nivel = 0;
 		Nodo hijo = e;
-		if (hijo.getPadre() == null) {
-			nivel = 0;
-		} else {
-			while (hijo.getPadre() != null) {
-				nivel++;
-				hijo = hijo.getPadre();
-			}
+		
+		while (hijo.getPadre() != null) {
+			nivel++;
+			hijo = hijo.getPadre();
 		}
+		
 		return nivel;
 	}
 	

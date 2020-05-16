@@ -6,8 +6,8 @@ public class NodoHoja extends Nodo {
 
 	private Color color;
 
-	public NodoHoja(Rectangulo rect, int altura, NodoPadre padre, Color color) {
-		super(rect, altura, padre);
+	public NodoHoja(Rectangulo rect, NodoPadre padre, Color color) {
+		super(rect, padre);
 		this.color = color;
 	}
 
