@@ -23,7 +23,7 @@ public class ProcesosArbol extends JFrame{
 	public ProcesosArbol() {
 	}
 	
-	public QuadTree imagenToArbol(BufferedImage img) {
+	public static QuadTree imagenToArbol(BufferedImage img) {
 		
 		Nodo nodito = new Nodo(new Rectangulo(img.getWidth(), img.getHeight(), img.getHeight()));
 		QuadTree Arbol = new QuadTree(imagenToArbol(img, nodito));
@@ -49,7 +49,7 @@ public class ProcesosArbol extends JFrame{
 		
 	}
 
-	public void arbolToImagen(QuadTree arbol) throws ExceptionNodo {
+	public static void arbolToImagen(QuadTree arbol) throws ExceptionNodo {
 		//int px=(int) Math.pow(2, arbol.getAltura());
 		
 		arbolToImagen(arbol.getRoot(),2);
@@ -165,11 +165,12 @@ public class ProcesosArbol extends JFrame{
 		
 	}
 
-	public static void main (String[]Args) {
+	public static void main (String[]Args) throws ExceptionNodo {
 		
 		BufferedImage img = null;
 		try {
-		    img = ImageIO.read(new File("C:\\Users\\Decol\\Desktop\\download.JPG"));
+		    img = ImageIO.read(new File("C:\\Users\\Decol\\Desktop\\download.PNG"));
+		    arbolToImagen(imagenToArbol(img));
 		} catch (IOException e) {
 		}
 		System.out.println(img.getHeight()+", "+img.getWidth());
