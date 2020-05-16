@@ -30,21 +30,22 @@ public class ProcesosArbol extends JFrame{
 		return Arbol;
 	}
 	
-	public Nodo imagenToArbol(BufferedImage img, Nodo r) {
-		if(img.getWidth()==1) return null;
+	public static Nodo imagenToArbol(BufferedImage img, Nodo r) {
+		if(img.getWidth()==1) return new Nodo(new Rectangulo(1,1,1), new Color(img.getRGB(1, 1)));
 		else {
-			r.setNw(new Nodo(new Rectangulo(0, 0, img.getWidth()/2)));
-			r.setNw(imagenToArbol(img.getSubimage(0, 0, img.getWidth()/2, img.getHeight()/2), r.getNw()));
+			r.setNw(new Nodo(new Rectangulo(1, 1, img.getWidth()/2)));
+			r.setNw(imagenToArbol(img.getSubimage(1, 1, img.getWidth()/2, img.getHeight()/2), r.getNw()));
 			
-			r.setNe(new Nodo(new Rectangulo(img.getWidth()/2, 0, img.getWidth()/2)));
-			r.setNe(imagenToArbol(img.getSubimage(img.getWidth()/2, 0, img.getWidth()/2, img.getHeight()/2), r.getNe()));
+			r.setNe(new Nodo(new Rectangulo(img.getWidth()/2, 1, img.getWidth()/2)));
+			r.setNe(imagenToArbol(img.getSubimage(img.getWidth()/2, 1, img.getWidth()/2, img.getHeight()/2), r.getNe()));
 			
 			r.setSe(new Nodo(new Rectangulo(img.getWidth()/2, img.getHeight()/2, img.getWidth()/2)));
 			r.setSe(imagenToArbol(img.getSubimage(img.getWidth()/2, img.getHeight()/2, img.getWidth()/2, img.getHeight()/2), r.getSe()));
 			
-			r.setSw(new Nodo(new Rectangulo(0, img.getHeight()/2, img.getWidth()/2)));
-			r.setSw(imagenToArbol(img.getSubimage(0, img.getHeight()/2, img.getWidth()/2, img.getHeight()/2), r.getSw()));
+			r.setSw(new Nodo(new Rectangulo(1, img.getHeight()/2, img.getWidth()/2)));
+			r.setSw(imagenToArbol(img.getSubimage(1, img.getHeight()/2, img.getWidth()/2, img.getHeight()/2), r.getSw()));
 		}
+		return r;
 		
 	}
 
