@@ -66,9 +66,8 @@ public class Nodo {
 
 	public int nivelNodo(Nodo e) {
 		int nivel = 0;
-		Nodo padre = e.getPadre();
 		Nodo hijo = e;
-		if (padre == null) {
+		if (hijo.getPadre() == null) {
 			nivel = 0;
 		} else {
 			while (hijo.getPadre() != null) {
