@@ -23,6 +23,14 @@ public class Nodo {
 
 	// -----------------------------------------------------------------------------------------------------
 
+	public boolean isHoja() {
+		return hoja;
+	}
+
+	public void setHoja(boolean hoja) {
+		this.hoja = hoja;
+	}
+
 	public Nodo(Rectangulo rect) {
 		super();
 		this.rect = rect;
@@ -41,6 +49,7 @@ public class Nodo {
 	}
 
 	public void setNw(Nodo nw) {
+		nw.setPadre(this);
 		this.nw = nw;
 	}
 
@@ -49,6 +58,7 @@ public class Nodo {
 	}
 
 	public void setNe(Nodo ne) {
+		ne.setPadre(this);
 		this.ne = ne;
 	}
 
@@ -57,6 +67,7 @@ public class Nodo {
 	}
 
 	public void setSe(Nodo se) {
+		se.setPadre(this);
 		this.se = se;
 	}
 
@@ -65,6 +76,7 @@ public class Nodo {
 	}
 
 	public void setSw(Nodo sw) {
+		sw.setPadre(this);
 		this.sw = sw;
 	}
 
@@ -107,14 +119,6 @@ public class Nodo {
 		}
 
 		return nivel;
-	}
-
-	public boolean isHoja() {
-		return hoja;
-	}
-
-	public void setHoja(boolean hoja) {
-		this.hoja = hoja;
 	}
 
 	// -----------------------------------------------------------------------------------------------------
