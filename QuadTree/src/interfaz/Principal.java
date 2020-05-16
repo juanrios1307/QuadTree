@@ -1,7 +1,13 @@
 package interfaz;
 
 import java.awt.EventQueue;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+
+import quadTree.ExceptionNodo;
 import quadTree.ProcesosArbol;
 
 public class Principal {
@@ -11,7 +17,9 @@ public class Principal {
             public void run() {
                 try {
                 	//InterfazEntrada guiEntrada=new InterfazEntrada();
-                	InterfazFigura guiEntrada=new InterfazFigura(new ProcesosArbol().crearArbolPrueba());
+                	BufferedImage img = null;
+        		    img = ImageIO.read(new File("C:\\Users\\Decol\\Desktop\\download.PNG"));
+                	InterfazFigura guiEntrada=new InterfazFigura(new ProcesosArbol().imagenToArbol(img));
             
                 	guiEntrada.setVisible(true);   
             		
@@ -22,6 +30,15 @@ public class Principal {
             }
         });
 		
+		
+		
+		
+		
+//			BufferedImage img = null;
+//		    img = ImageIO.read(new File("C:\\Users\\Decol\\Desktop\\download.PNG"));
+//		   new ProcesosArbol().arbolToImagen(new ProcesosArbol().imagenToArbol(img));
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
 	}
 	
 }

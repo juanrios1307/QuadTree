@@ -23,15 +23,15 @@ public class ProcesosArbol extends JFrame{
 	public ProcesosArbol() {
 	}
 	
-	public static QuadTree imagenToArbol(BufferedImage img) {
+	public QuadTree imagenToArbol(BufferedImage img) {
 		
 		Nodo nodito = new Nodo(new Rectangulo(img.getWidth(), img.getHeight(), img.getHeight()));
 		QuadTree Arbol = new QuadTree(imagenToArbol(img, nodito));
 		return Arbol;
 	}
 	
-	public static Nodo imagenToArbol(BufferedImage img, Nodo r) {
-		if(img.getWidth()==1) return new Nodo(new Rectangulo(1,1,1), new Color(img.getRGB(1, 1)));
+	public Nodo imagenToArbol(BufferedImage img, Nodo r) {
+		if(img.getWidth()==1) return new Nodo(new Rectangulo(img.getMinX(),img.getMinY(),1), new Color(img.getRGB(img.getMinX(),img.getMinY())));
 		else {
 			r.setNw(new Nodo(new Rectangulo(1, 1, img.getWidth()/2)));
 			r.setNw(imagenToArbol(img.getSubimage(1, 1, img.getWidth()/2, img.getHeight()/2), r.getNw()));
@@ -49,7 +49,7 @@ public class ProcesosArbol extends JFrame{
 		
 	}
 
-	public static void arbolToImagen(QuadTree arbol) throws ExceptionNodo {
+	public void arbolToImagen(QuadTree arbol) throws ExceptionNodo {
 		//int px=(int) Math.pow(2, arbol.getAltura());
 		
 		arbolToImagen(arbol.getRoot(),2);
@@ -163,17 +163,6 @@ public class ProcesosArbol extends JFrame{
 		
 		return arbol;
 		
-	}
-
-	public static void main (String[]Args) throws ExceptionNodo {
-		
-		BufferedImage img = null;
-		try {
-		    img = ImageIO.read(new File("C:\\Users\\Decol\\Desktop\\download.PNG"));
-		    arbolToImagen(imagenToArbol(img));
-		} catch (IOException e) {
-		}
-		System.out.println(img.getHeight()+", "+img.getWidth());
 	}
 	
 }
