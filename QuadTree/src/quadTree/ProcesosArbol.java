@@ -31,7 +31,7 @@ public class ProcesosArbol extends JFrame{
 	}
 	
 	public Nodo imagenToArbol(BufferedImage img, Nodo r) {
-		if(img.getWidth()==1){ return }
+		if(img.getWidth()==1) return null;
 		else {
 			r.setNw(new Nodo(new Rectangulo(0, 0, img.getWidth()/2)));
 			r.setNw(imagenToArbol(img.getSubimage(0, 0, img.getWidth()/2, img.getHeight()/2), r.getNw()));
