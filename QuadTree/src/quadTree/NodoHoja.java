@@ -4,10 +4,10 @@ import java.awt.Color;
 
 public class NodoHoja extends Nodo {
 
-	Color color;
+	private Color color;
 
-	public NodoHoja(Rectangulo rect, Color color) {
-		super(rect);
+	public NodoHoja(Rectangulo rect, int altura, NodoPadre padre, Color color) {
+		super(rect, altura, padre);
 		this.color = color;
 	}
 
@@ -18,5 +18,6 @@ public class NodoHoja extends Nodo {
 	public void setColor(Color color) {
 		this.color = color;
 	}
+
 
 }

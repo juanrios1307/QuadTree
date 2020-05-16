@@ -4,8 +4,8 @@ public class NodoPadre extends Nodo{
 	
 	private Nodo nw,ne,se,sw;
 
-	public NodoPadre(Rectangulo rect, Nodo nw, Nodo ne, Nodo se, Nodo sw) {
-		super(rect);
+	public NodoPadre(Rectangulo rect, int altura, NodoPadre padre, Nodo nw, Nodo ne, Nodo se, Nodo sw) {
+		super(rect, altura, padre);
 		this.nw = nw;
 		this.ne = ne;
 		this.se = se;
