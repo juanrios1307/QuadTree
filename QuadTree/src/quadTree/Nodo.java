@@ -5,9 +5,9 @@ import java.awt.*;
 public class Nodo {
 
 	private Rectangulo rect;
-	private int altura;
 	private Color color;
 	private Nodo nw, ne, se, sw, padre;
+	private boolean hoja;
 
 	// -----------------------------------------------------------------------------------------------------
 
@@ -72,14 +72,6 @@ public class Nodo {
 		this.rect = rect;
 	}
 
-	public int getAltura() {
-		return altura;
-	}
-
-	public void setAltura(int altura) {
-		this.altura = altura;
-	}
-
 	public Color getColor() {
 		return color;
 	}
@@ -115,6 +107,14 @@ public class Nodo {
 		}
 
 		return nivel;
+	}
+
+	public boolean isHoja() {
+		return hoja;
+	}
+
+	public void setHoja(boolean hoja) {
+		this.hoja = hoja;
 	}
 
 	// -----------------------------------------------------------------------------------------------------
