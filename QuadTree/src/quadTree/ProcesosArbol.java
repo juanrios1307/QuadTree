@@ -25,7 +25,7 @@ public class ProcesosArbol extends JFrame{
 	
 	public QuadTree imagenToArbol(BufferedImage img) {
 		
-		Nodo nodito = new Nodo(new Rectangulo(img.getWidth(), img.getHeight(), img.getHeight()));
+		Nodo nodito = new Nodo(new Rectangulo(1, 1, img.getHeight()));
 		QuadTree Arbol = new QuadTree(imagenToArbol(img, nodito));
 		return Arbol;
 	}
