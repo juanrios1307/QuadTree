@@ -9,9 +9,6 @@ public class QuadTree {
 		this.root=root;
 	}
 	
-	public int getAltura() {
-		return root.getAltura();
-	}
 	
 	public Nodo getRoot() {	
 		return root;
@@ -22,23 +19,22 @@ public class QuadTree {
 	}
 	
 	public void recorrer(Nodo r) throws ExceptionNodo{
-		if(r instanceof NodoPadre){
-			
-			NodoPadre aux=(NodoPadre)r;
-			if(aux.getNw() != null){
-				recorrer(aux.getNw());
+		if(r.isHoja()){
+
+			if(r.getNw() != null){
+				recorrer(r.getNw());
 			}
-			if(aux.getNe() != null){
-				recorrer(aux.getNe());
+			if(r.getNe() != null){
+				recorrer(r.getNe());
 			}
-			if(aux.getSe() != null){
-				recorrer(aux.getSe());
+			if(r.getSe() != null){
+				recorrer(r.getSe());
 			}
-			if(aux.getSw() != null){
-				recorrer(aux.getSw());
+			if(r.getSw() != null){
+				recorrer(r.getSw());
 			}
 		}else{
-			System.out.println(((NodoHoja) r).getRect().getX());
+			System.out.println(r.getRect().getX());
 		
 		}
 	}

@@ -34,20 +34,20 @@ public class ProcesosArbol extends JFrame{
 	}
 
 	public void arbolToImagen(QuadTree arbol) throws ExceptionNodo {
-		int px=(int) Math.pow(2, arbol.getAltura());
+		/*int px=(int) Math.pow(2, arbol.getAltura());
 		
-		arbolToImagen(arbol.getRoot(),arbol.getAltura());
+		arbolToImagen(arbol.getRoot(),arbol.getAltura());*/
 	}
 	
 	public void arbolToImagen(Nodo r,int h) throws ExceptionNodo{
 		
-		int lado=(int)Math.pow(2, r.getAltura())*20;
-		if(r instanceof NodoPadre){
+		//int lado=(int)Math.pow(2, r.getAltura())*20;
+		if(!r.isHoja()){
 
 			dividir(r.getRect().getX(), r.getRect().getY(), r.getRect().getLado());
 			//dividir(r.getRect().getX(), r.getRect().getY(), lado);
 			
-			NodoPadre aux=(NodoPadre)r;
+			Nodo aux=r;
 			if(aux.getNw() != null){
 				arbolToImagen(aux.getNw(),h);
 				
@@ -65,7 +65,7 @@ public class ProcesosArbol extends JFrame{
 				
 			}
 		}else{
-			NodoHoja aux=(NodoHoja)r;
+			Nodo aux=r;
 			pintar(aux.getRect().getX(),aux.getRect().getY(),aux.getRect().getLado(),aux.getColor());
 			
 		}
@@ -97,38 +97,35 @@ public class ProcesosArbol extends JFrame{
 		
 
 		
-		NodoHoja h00=new NodoHoja(new Rectangulo(140, 100, 20), new Color(250,0,0));
-		NodoHoja h01=new NodoHoja(new Rectangulo(160, 100, 20), Color.black);
-		NodoHoja h02=new NodoHoja(new Rectangulo(160, 120, 20), Color.green);
-		NodoHoja h03=new NodoHoja(new Rectangulo(140, 120, 20), Color.PINK);
+		Nodo h00=new Nodo(new Rectangulo(140, 100, 20), new Color(250,0,0));
+		Nodo h01=new Nodo(new Rectangulo(160, 100, 20), Color.black);
+		Nodo h02=new Nodo(new Rectangulo(160, 120, 20), Color.green);
+		Nodo h03=new Nodo(new Rectangulo(140, 120, 20), Color.PINK);
 		
-		NodoHoja h10=new NodoHoja(new Rectangulo(100, 100, 40),Color.green);
-		NodoPadre h11=new NodoPadre(new Rectangulo(140, 100, 40), h00, h01, h02, h03);
+		Nodo h10=new Nodo(new Rectangulo(100, 100, 40),Color.green);
+		//Nodo h11=new Nodo(new Rectangulo(140, 100, 40), h00, h01, h02, h03);
 		
-		NodoHoja h12=new NodoHoja(new Rectangulo(140, 140, 40),Color.red);
-		NodoHoja h13=new NodoHoja(new Rectangulo(100, 140, 40),Color.pink);
+		Nodo h12=new Nodo(new Rectangulo(140, 140, 40),Color.red);
+		Nodo h13=new Nodo(new Rectangulo(100, 140, 40),Color.pink);
 		
-		NodoPadre h20=new NodoPadre(new Rectangulo(100, 100, 80), h10, h11, h12, h13);
+		//Nodo h20=new Nodo(new Rectangulo(100, 100, 80), h10, h11, h12, h13);
 		
-		NodoHoja h21=new NodoHoja(new Rectangulo(180,100,80),Color.pink);
+		Nodo h21=new Nodo(new Rectangulo(180,100,80),Color.pink);
 		
-		NodoHoja h14=new NodoHoja(new Rectangulo(180, 180, 40),Color.green);
-		NodoHoja h15=new NodoHoja(new Rectangulo(220, 180, 40),Color.red);
-		NodoHoja h16=new NodoHoja(new Rectangulo(220, 220, 40),Color.green);
-		NodoHoja h17=new NodoHoja(new Rectangulo(180, 220, 40),Color.red);
+		Nodo h14=new Nodo(new Rectangulo(180, 180, 40),Color.green);
+		Nodo h15=new Nodo(new Rectangulo(220, 180, 40),Color.red);
+		Nodo h16=new Nodo(new Rectangulo(220, 220, 40),Color.green);
+		Nodo h17=new Nodo(new Rectangulo(180, 220, 40),Color.red);
 		
-		NodoPadre h22=new NodoPadre(new Rectangulo(180, 180, 80), h14, h15, h16, h17);
+		//Nodo h22=new Nodo(new Rectangulo(180, 180, 80), h14, h15, h16, h17);
 		
-		NodoHoja h23=new NodoHoja(new Rectangulo(100,180,80),Color.cyan);
+		Nodo h23=new Nodo(new Rectangulo(100,180,80),Color.cyan);
 		
-		NodoPadre h30=new NodoPadre(new Rectangulo(100, 100, 160),h20,h21,h22,h23);
+		//Nodo h30=new Nodo(new Rectangulo(100, 100, 160),h20,h21,h22,h23);
 		
-		QuadTree arbol=new QuadTree(h30);
+		QuadTree arbol=new QuadTree(h23);
 		
-		System.out.println(h30.getAltura());
-		System.out.println(h20.getAltura());
-		System.out.println(h11.getAltura());
-		System.out.println(h22.getAltura());
+		
 		
 		return arbol;
 		
