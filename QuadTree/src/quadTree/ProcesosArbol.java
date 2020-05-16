@@ -3,7 +3,10 @@ package quadTree;
 
 import java.awt.*;
 import java.awt.image.*;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import interfaz.InterfazFigura;
@@ -21,16 +24,13 @@ public class ProcesosArbol extends JFrame{
 	}
 	
 	public QuadTree imagenToArbol(BufferedImage img) {
-		int px=img.getHeight();
 		
-		for (int i = 0; i < px/4; i+=4) {
-			for (int j = 0; j < px/4; j+=4) {
-				img.getSubimage(i, j, 4, 4).getRGB(i+2, j+2);
-			}
-		}
+		NodoPadre nodito = new NodoPadre();
+		QuadTree Arbol = new QuadTree(null);
+	}
 	
+	public QuadTree imagenToArbol(BufferedImage img, QuadTree Arbol) {
 		
-		return null;
 	}
 
 	public void arbolToImagen(QuadTree arbol) throws ExceptionNodo {
@@ -134,6 +134,14 @@ public class ProcesosArbol extends JFrame{
 		
 	}
 
-	
+	public static void main (String[]Args) {
+		
+		BufferedImage img = null;
+		try {
+		    img = ImageIO.read(new File("C:\\Users\\Decol\\Desktop\\download.JPG"));
+		} catch (IOException e) {
+		}
+		System.out.println(img.getHeight()+", "+img.getWidth());
+	}
 	
 }
