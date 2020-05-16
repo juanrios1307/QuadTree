@@ -19,7 +19,7 @@ public class Nodo {
 		super();
 		this.rect = rect;
 		this.color = color;
-		this.hoja=true;
+		this.hoja = true;
 	}
 
 	// -----------------------------------------------------------------------------------------------------
@@ -94,9 +94,24 @@ public class Nodo {
 	}
 
 	// -----------------------------------------------------------------------------------------------------
+
+	public int altura() {
+		return altura(this);
+	}
+
+	public int altura(Nodo n) {
+		if (n == null)
+			return -1;
+
+		Nodo aux = n;
+		int nw = (aux.getNw() == null ? 0 : 1 + altura(aux.getNw()));
+		int ne = (aux.getNe() == null ? 0 : 1 + altura(aux.getNe()));
+		int sw = (aux.getSw() == null ? 0 : 1 + altura(aux.getSw()));
+		int se = (aux.getSe() == null ? 0 : 1 + altura(aux.getSe()));
+		return Math.max(Math.max(nw, ne), Math.max(sw, se));
+	}
+
 	/*
-	 * public int altura() { return altura(this); }
-	 * 
 	 * public int altura(Nodo n) { if (n == null) return -1;
 	 * 
 	 * if (n instanceof NodoPadre) { NodoPadre aux = (NodoPadre) n;
@@ -108,6 +123,7 @@ public class Nodo {
 	 * 
 	 * return Math.max(Math.max(nw, ne), Math.max(sw, se)); } else return 0; }
 	 */
+
 	// -----------------------------------------------------------------------------------------------------
 
 	public int nivelNodo(Nodo e) {
