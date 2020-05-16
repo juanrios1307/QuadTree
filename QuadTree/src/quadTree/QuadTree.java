@@ -17,7 +17,9 @@ public class QuadTree {
 		return root;
 	}
 
-
+	public void recorrer() throws ExceptionNodo {
+		recorrer(root);
+	}
 	
 	public void recorrer(Nodo r) throws ExceptionNodo{
 		if(r instanceof NodoPadre){
@@ -36,7 +38,7 @@ public class QuadTree {
 				recorrer(aux.getSw());
 			}
 		}else{
-			System.out.println(((NodoHoja) r).getColor());
+			System.out.println(((NodoHoja) r).getRect().getX());
 		
 		}
 	}

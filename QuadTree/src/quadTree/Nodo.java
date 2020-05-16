@@ -11,9 +11,8 @@ public class Nodo {
 
 	// -----------------------------------------------------------------------------------------------------
 
-	public Nodo(Rectangulo rect) {
-		super();
-		this.rect = rect;
+	public Nodo getPadre() {
+		return padre;
 	}
 
 	public Nodo(Rectangulo rect, Color color) {
@@ -24,8 +23,9 @@ public class Nodo {
 
 	// -----------------------------------------------------------------------------------------------------
 
-	public Nodo getPadre() {
-		return padre;
+	public Nodo(Rectangulo rect) {
+		super();
+		this.rect = rect;
 	}
 
 	public void setPadre(Nodo padre) {
@@ -108,14 +108,12 @@ public class Nodo {
 	public int nivelNodo(Nodo e) {
 		int nivel = 0;
 		Nodo hijo = e;
-		if (hijo.getPadre() == null) {
-			nivel = 0;
-		} else {
-			while (hijo.getPadre() != null) {
-				nivel++;
-				hijo = hijo.getPadre();
-			}
+
+		while (hijo.getPadre() != null) {
+			nivel++;
+			hijo = hijo.getPadre();
 		}
+
 		return nivel;
 	}
 

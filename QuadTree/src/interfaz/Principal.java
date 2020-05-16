@@ -10,8 +10,8 @@ public class Principal {
 		EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                	InterfazEntrada guiEntrada=new InterfazEntrada();
-                	//InterfazFigura guiEntrada=new InterfazFigura(new ProcesosArbol().crearArbolPrueba());
+                	//InterfazEntrada guiEntrada=new InterfazEntrada();
+                	InterfazFigura guiEntrada=new InterfazFigura(new ProcesosArbol().crearArbolPrueba());
             
                 	guiEntrada.setVisible(true);   
             		
