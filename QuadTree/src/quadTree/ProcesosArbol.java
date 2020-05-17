@@ -25,36 +25,52 @@ public class ProcesosArbol extends JFrame{
 	
 	public QuadTree imagenToArbol(BufferedImage img) {
 		
-		Nodo nodito = new Nodo(new Rectangulo(1, 1, img.getHeight()));
-		QuadTree Arbol = new QuadTree(imagenToArbol(img, nodito));
+		Nodo R = new Nodo(new Rectangulo(1, 1, img.getHeight()));
+		QuadTree Arbol = new QuadTree(imagenToArbol(img, R));
 		return Arbol;
 	}
-	
 	public Nodo imagenToArbol(BufferedImage img, Nodo r) {
 		if(img.getWidth()==1) return new Nodo(new Rectangulo(img.getMinX(),img.getMinY(),1), new Color(img.getRGB(img.getMinX(),img.getMinY())));
 		else {
 			r.setNw(new Nodo(new Rectangulo(1, 1, img.getWidth()/2)));
-			r.setNw(imagenToArbol(img.getSubimage(1, 1, img.getWidth()/2, img.getHeight()/2), r.getNw()));
+			r.setNw(imagenToArbol(nw(img), r.getNw()));
 			
 			r.setNe(new Nodo(new Rectangulo(img.getWidth()/2, 1, img.getWidth()/2)));
-			r.setNe(imagenToArbol(img.getSubimage(img.getWidth()/2, 1, img.getWidth()/2, img.getHeight()/2), r.getNe()));
+			r.setNe(imagenToArbol(ne(img), r.getNe()));
 			
 			r.setSe(new Nodo(new Rectangulo(img.getWidth()/2, img.getHeight()/2, img.getWidth()/2)));
-			r.setSe(imagenToArbol(img.getSubimage(img.getWidth()/2, img.getHeight()/2, img.getWidth()/2, img.getHeight()/2), r.getSe()));
+			r.setSe(imagenToArbol(se(img), r.getSe()));
 			
 			r.setSw(new Nodo(new Rectangulo(1, img.getHeight()/2, img.getWidth()/2)));
-			r.setSw(imagenToArbol(img.getSubimage(1, img.getHeight()/2, img.getWidth()/2, img.getHeight()/2), r.getSw()));
+			r.setSw(imagenToArbol(sw(img), r.getSw()));
 		}
 		return r;
 		
 	}
 
+	public BufferedImage nw(BufferedImage img){
+		return img.getSubimage(1, 1, img.getWidth()/2, img.getHeight()/2);
+	}
+	public BufferedImage ne(BufferedImage img){		
+		return img.getSubimage(img.getWidth()/2, 1, img.getWidth()/2, img.getHeight()/2);
+	}
+	public BufferedImage nw(){
+		
+	}
+	public BufferedImage se(BufferedImage img){
+		return img.getSubimage(img.getWidth()/2, img.getHeight()/2, img.getWidth()/2, img.getHeight()/2);
+		
+	}
+	public BufferedImage sw(BufferedImage img){
+		return img.getSubimage(1, img.getHeight()/2, img.getWidth()/2, img.getHeight()/2);
+		
+	}
+	
 	public void arbolToImagen(QuadTree arbol) throws ExceptionNodo {
 		//int px=(int) Math.pow(2, arbol.getAltura());
 		
 		arbolToImagen(arbol.getRoot(),2);
 	}
-	
 	public void arbolToImagen(Nodo r,int h) throws ExceptionNodo{
 		
 		//int lado=(int)Math.pow(2, r.getAltura())*20;

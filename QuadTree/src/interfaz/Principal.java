@@ -20,7 +20,7 @@ public class Principal {
                 	BufferedImage img = null;
         		    img = ImageIO.read(new File("C:\\Users\\Decol\\Desktop\\download.PNG"));
                 	InterfazFigura guiEntrada=new InterfazFigura(new ProcesosArbol().imagenToArbol(img));
-            
+            		System.out.println(img.getRGB(0,0));
                 	guiEntrada.setVisible(true);   
             		
             		
