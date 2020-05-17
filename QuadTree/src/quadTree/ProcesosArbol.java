@@ -23,7 +23,7 @@ public class ProcesosArbol extends JFrame{
 	public ProcesosArbol() {
 	}
 	
-	public QuadTree imagenToArbol(BufferedImage img) {
+public QuadTree imagenToArbol(BufferedImage img) {
 		
 		Nodo root = new Nodo(new Rectangulo(1, 1, img.getHeight()));
 		imagenToArbol(img, root,1,1);
@@ -89,15 +89,34 @@ public class ProcesosArbol extends JFrame{
 		}
 			
 		
+			
+		
 		
 	}
 
+//	public BufferedImage nw(BufferedImage img){
+//		return img.getSubimage(1, 1, img.getWidth()/2, img.getHeight()/2);
+//	}
+//	public BufferedImage ne(BufferedImage img){		
+//		return img.getSubimage(img.getWidth()/2, 1, img.getWidth()/2, img.getHeight()/2);
+//	}
+//	public BufferedImage nw(){
+//		
+//	}
+//	public BufferedImage se(BufferedImage img){
+//		return img.getSubimage(img.getWidth()/2, img.getHeight()/2, img.getWidth()/2, img.getHeight()/2);
+//		
+//	}
+//	public BufferedImage sw(BufferedImage img){
+//		return img.getSubimage(1, img.getHeight()/2, img.getWidth()/2, img.getHeight()/2);
+//		
+//	}
+	
 	public void arbolToImagen(QuadTree arbol) throws ExceptionNodo {
 		//int px=(int) Math.pow(2, arbol.getAltura());
 		
 		arbolToImagen(arbol.getRoot(),2);
 	}
-	
 	public void arbolToImagen(Nodo r,int h) throws ExceptionNodo{
 		
 		//int lado=(int)Math.pow(2, r.getAltura())*20;
