@@ -42,7 +42,9 @@ public class QuadTree {
 
 	}
 
-	
+	public int getPx() {
+		return (int) Math.pow(2, getRoot().altura());
+	}
 
 	
 }

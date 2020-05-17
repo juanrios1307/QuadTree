@@ -13,12 +13,7 @@ import interfaz.InterfazFigura;
 
 public class ProcesosArbol extends JFrame{
 	
-	Graphics G;
-	static QuadTree arbol;
-	
-	public ProcesosArbol(Graphics G) {
-		this.G=G;
-	}
+	BufferedImage imagen;
 	
 	public ProcesosArbol() {
 	}
@@ -85,85 +80,72 @@ public QuadTree imagenToArbol(BufferedImage img) {
 			}
 		}	
 	}
-
-//	public BufferedImage nw(BufferedImage img){
-//		return img.getSubimage(1, 1, img.getWidth()/2, img.getHeight()/2);
-//	}
-//	public BufferedImage ne(BufferedImage img){		
-//		return img.getSubimage(img.getWidth()/2, 1, img.getWidth()/2, img.getHeight()/2);
-//	}
-//	public BufferedImage nw(){
-//		
-//	}
-//	public BufferedImage se(BufferedImage img){
-//		return img.getSubimage(img.getWidth()/2, img.getHeight()/2, img.getWidth()/2, img.getHeight()/2);
-//		
-//	}
-//	public BufferedImage sw(BufferedImage img){
-//		return img.getSubimage(1, img.getHeight()/2, img.getWidth()/2, img.getHeight()/2);
-//		
-//	}
 	
-	public void arbolToImagen(QuadTree arbol) throws ExceptionNodo {
-		//int px=(int) Math.pow(2, arbol.getAltura());
+	public BufferedImage arbolToImagen(QuadTree arbol) throws ExceptionNodo {
+		imagen=new BufferedImage(arbol.getPx(), arbol.getPx(), BufferedImage.TYPE_3BYTE_BGR);
 		
-		arbolToImagen(arbol.getRoot(),2);
+		return arbolToImagen(arbol.getRoot(),2);
+		
 	}
-	public void arbolToImagen(Nodo r,int h) throws ExceptionNodo{
+	public BufferedImage arbolToImagen(Nodo r,int h) throws ExceptionNodo{
 		
-		//int lado=(int)Math.pow(2, r.getAltura())*20;
 		if(!r.isHoja()){
+			//dividir(r.getRect().getX(), r.getRect().getY(), r.getRect().getLado());
 
-			dividir(r.getRect().getX(), r.getRect().getY(), r.getRect().getLado());
-			//dividir(r.getRect().getX(), r.getRect().getY(), lado);
-			
-			Nodo aux=r;
-			if(aux.getNw() != null){
-				arbolToImagen(aux.getNw(),h);
+			if(r.getNw() != null){
+				arbolToImagen(r.getNw(),h);
 				
 			}
-			if(aux.getNe() != null){
-				arbolToImagen(aux.getNe(), h);
+			if(r.getNe() != null){
+				arbolToImagen(r.getNe(), h);
 				
 			}
-			if(aux.getSe() != null){
-				arbolToImagen(aux.getSe(),h);
+			if(r.getSe() != null){
+				arbolToImagen(r.getSe(),h);
 				
 			}
-			if(aux.getSw() != null){
-				arbolToImagen(aux.getSw(),h);
+			if(r.getSw() != null){
+				arbolToImagen(r.getSw(),h);
 				
 			}
 		}else{
-			Nodo aux=r;
-			pintar(aux.getRect().getX(),aux.getRect().getY(),aux.getRect().getLado(),aux.getColor());
+			pintar(r);
 			
 		}
+		return imagen;
 	}
 	
 	
-	public Graphics pintar(int x,int y,int l,Color color) {
-		super.paint(G);
-		
-		
-		G.setColor(color);
-		G.fillRect(x, y, l, l);
-		
-		return G;
+	public void pintar(Nodo r) {
+		if(r.getRect().getLado()>1) {	
+			for (int i = 0; i < r.getRect().getLado(); i++) {
+				for (int j = 0; j < r.getRect().getLado(); j++) {
+					imagen.setRGB(r.getRect().getX()+i, r.getRect().getY()+j, r.getColor().getRGB());
+				}
+			}
+		}else
+			imagen.setRGB(r.getRect().getX(), r.getRect().getY(), r.getColor().getRGB());
 	}
 	
-	public Graphics dividir(int x,int y,int l){
-		//se va a poner cuadricula de la imagen
-		super.paint(G);
-		G.setColor(Color.black.darker());
-		//G.drawRect(x, y, l, l);
-		
-		G.drawLine(x, y+l/2, x+l, y+l/2);
-		
-		G.drawLine(x+l/2, y, x+l/2, y+l);
-		
-		return G;
-	}
+//	public void paint (Graphics g){
+//        super.paint(g);
+//    	
+//    	g.drawImage((Image)imagen, imagen.getWidth(),imagen.getHeight(),this);
+//            
+//    }
+	
+//	public Graphics dividir(int x,int y,int l){
+//		//se va a poner cuadricula de la imagen
+//		super.paint(G);
+//		G.setColor(Color.black.darker());
+//		//G.drawRect(x, y, l, l);
+//		
+//		G.drawLine(x, y+l/2, x+l, y+l/2);
+//		
+//		G.drawLine(x+l/2, y, x+l/2, y+l);
+//		
+//		return G;
+//	}
 
 	public static QuadTree crearArbolPrueba() {
 		
