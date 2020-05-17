@@ -18,7 +18,7 @@ public class InterfazFigura extends JFrame {
          contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
          setContentPane(contentPane);
          contentPane.setLayout(null);
-         setBounds(400,100,600,625);
+         setBounds(400,100,1024,1024);
          
          this.arbol=arbol;
 
