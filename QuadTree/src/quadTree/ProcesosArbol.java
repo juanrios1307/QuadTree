@@ -26,12 +26,12 @@ public class ProcesosArbol extends JFrame{
 public QuadTree imagenToArbol(BufferedImage img) {
 		
 		Nodo root = new Nodo(new Rectangulo(1, 1, img.getHeight()));
-		imagenToArbol(img, root,1,1);
+		imagenToArbol(img, root,0,0,1,1);
 		QuadTree arbol = new QuadTree(root);
 		//arbol=crearArbolPrueba();
 	
 		
-		//try {
+//		try {
 //			arbol.recorrer();
 //		} catch (ExceptionNodo e) {
 //			e.printStackTrace();
@@ -40,58 +40,50 @@ public QuadTree imagenToArbol(BufferedImage img) {
 		return arbol;
 	}
 	
-	public void imagenToArbol(BufferedImage img, Nodo r,int x,int y) {
-		if(img.getWidth()==32) {
-//			r.setNw(new Nodo(new Rectangulo(x,y,8), new Color(img.getRGB(img.getMinX(),img.getMinY()))));
-//			r.setNe(new Nodo(new Rectangulo(8,y,8), new Color(img.getRGB(img.getMinX(),img.getMinY()))));
-//			r.setSe(new Nodo(new Rectangulo(8,8,8), new Color(img.getRGB(img.getMinX(),img.getMinY()))));
-//			r.setSw(new Nodo(new Rectangulo(x,8,8), new Color(img.getRGB(img.getMinX(),img.getMinY()))));
+	public void imagenToArbol(BufferedImage img, Nodo r,int x,int y,int xI,int yI) {
+		if(img.getWidth()==2) {
+			r.setNw(new Nodo(new Rectangulo(x,y,1), new Color(img.getRGB(img.getMinX(),img.getMinY()))));
+			r.setNe(new Nodo(new Rectangulo(1,y,1), new Color(img.getRGB(img.getMinX(),img.getMinY()))));
+			r.setSe(new Nodo(new Rectangulo(1,1,1), new Color(img.getRGB(img.getMinX(),img.getMinY()))));
+			r.setSw(new Nodo(new Rectangulo(x,1,1), new Color(img.getRGB(img.getMinX(),img.getMinY()))));
 			
-			r.setNw(new Nodo(new Rectangulo(x,y,16), Color.blue));
-			r.setNe(new Nodo(new Rectangulo(x+16,y,16), Color.red));
-			r.setSe(new Nodo(new Rectangulo(x+16,y+16,16), Color.green));
-			r.setSw(new Nodo(new Rectangulo(x,y+16,16), Color.CYAN));
+//			r.setNw(new Nodo(new Rectangulo(x,y,1), new Color(img.getRGB(xI+2,yI+2))));
+//			r.setNe(new Nodo(new Rectangulo(1,y,1), new Color(img.getRGB(xI+2,yI+2))));
+//			r.setSe(new Nodo(new Rectangulo(1,1,1), new Color(img.getRGB(xI+2,yI+2))));
+//			r.setSw(new Nodo(new Rectangulo(x,1,1), new Color(img.getRGB(xI+2,yI+2))));
+			
+//			r.setNw(new Nodo(new Rectangulo(x,y,img.getWidth()/2), Color.blue));
+//			r.setNe(new Nodo(new Rectangulo(x+img.getWidth()/2,y,img.getWidth()/2), Color.red));
+//			r.setSe(new Nodo(new Rectangulo(x+img.getWidth()/2,y+img.getWidth()/2,img.getWidth()/2), Color.green));
+//			r.setSw(new Nodo(new Rectangulo(x,y+img.getWidth()/2,img.getWidth()/2), Color.CYAN));
 			
 		}else {
 			try {
-				
 				r.setNw(new Nodo(new Rectangulo(x, y, img.getWidth()/2)));
 				r.setNe(new Nodo(new Rectangulo(x+img.getWidth()/2, y, img.getWidth()/2)));
 				r.setSe(new Nodo(new Rectangulo(x+img.getWidth()/2, y+img.getHeight()/2, img.getWidth()/2)));
 				r.setSw(new Nodo(new Rectangulo(x, y+img.getHeight()/2, img.getWidth()/2)));
 				
+				xI=1;
+				yI=1;
+				imagenToArbol(img.getSubimage(xI, yI, img.getWidth()/2, img.getHeight()/2), r.getNw(),x,y,xI,yI);
+				x+=img.getWidth()/2;
+				xI=img.getWidth()/2;
 				
-	
-				System.out.println("x :"+x+" y: "+y+" antes de empezar particiones"+" h: "+img.getHeight()/2);
-				System.out.println(img.getSubimage(x, y, img.getWidth()/2, img.getHeight()/2));
-				imagenToArbol(img.getSubimage(x, y, img.getWidth()/2, img.getHeight()/2), r.getNw(),x,y);
+				imagenToArbol(img.getSubimage(xI, yI, img.getWidth()/2, img.getHeight()/2), r.getNe(),x,y,xI,yI);
+				y+=img.getWidth()/2;
+				yI=img.getWidth()/2;
 				
-				
-				x=img.getWidth()/2;
-				
-				System.out.println("x: "+x+" antes de entrar a subpartir 2"+" y:"+y);
-				imagenToArbol(img.getSubimage(x, y, img.getWidth()/2, img.getHeight()/2), r.getNe(),x,y);
-				
-			
-				y=img.getWidth()/2;
-				
-				System.out.println("y: "+y+" antes de entrar a subpartir 3");
-				imagenToArbol(img.getSubimage(x, y, img.getWidth()/2, img.getHeight()/2), r.getSe(),x,y);
-			
+				imagenToArbol(img.getSubimage(xI, yI, img.getWidth()/2, img.getHeight()/2), r.getSe(),x,y,xI,yI);
 				x-=img.getWidth()/2-1;
+				xI-=img.getWidth()/2-1;
 				
-				System.out.println("x: "+x+" antes de entrar a subpartir 4");
-				imagenToArbol(img.getSubimage(x, y, img.getWidth()/2, img.getHeight()/2), r.getSw(),x,y);
+				imagenToArbol(img.getSubimage(xI, yI, img.getWidth()/2, img.getHeight()/2), r.getSw(),x,y,xI,yI);
 				
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-		}
-			
-		
-			
-		
-		
+		}	
 	}
 
 //	public BufferedImage nw(BufferedImage img){
@@ -152,6 +144,8 @@ public QuadTree imagenToArbol(BufferedImage img) {
 	
 	public Graphics pintar(int x,int y,int l,Color color) {
 		super.paint(G);
+		
+		
 		G.setColor(color);
 		G.fillRect(x, y, l, l);
 		
