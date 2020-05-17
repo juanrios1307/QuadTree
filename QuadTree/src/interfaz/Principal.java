@@ -18,7 +18,7 @@ public class Principal {
                 try {
                 	//InterfazEntrada guiEntrada=new InterfazEntrada();
                 	BufferedImage img = null;
-        		    img = ImageIO.read(new File("C:\\Users\\Decol\\Desktop\\download.PNG"));
+        		    img = ImageIO.read(new File("/home/juan-rios/Descargas/download.png"));
                 	InterfazFigura guiEntrada=new InterfazFigura(new ProcesosArbol().imagenToArbol(img));
             
                 	guiEntrada.setVisible(true);   

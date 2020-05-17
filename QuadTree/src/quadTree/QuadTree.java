@@ -15,26 +15,21 @@ public class QuadTree {
 	}
 
 	public void recorrer() throws ExceptionNodo {
-		recorrer(root);
+		recorrer(root," ");
 	}
 	
-	public void recorrer(Nodo r) throws ExceptionNodo{
-		if(r.isHoja()){
-
-			if(r.getNw() != null){
-				recorrer(r.getNw());
-			}
-			if(r.getNe() != null){
-				recorrer(r.getNe());
-			}
-			if(r.getSe() != null){
-				recorrer(r.getSe());
-			}
-			if(r.getSw() != null){
-				recorrer(r.getSw());
-			}
+	public void recorrer(Nodo r,String append) throws ExceptionNodo{
+		if(!r.isHoja()){
+			System.out.println(append+r);
+			
+				
+			recorrer(r.getNw(),append+append);
+			recorrer(r.getNe(),append+append);		
+			recorrer(r.getSe(),append+append);
+			recorrer(r.getSw(),append+append);
+			
 		}else{
-			System.out.println(r.getRect().getX());
+			System.out.println(append+r);
 		
 		}
 	}

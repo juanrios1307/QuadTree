@@ -25,27 +25,70 @@ public class ProcesosArbol extends JFrame{
 	
 	public QuadTree imagenToArbol(BufferedImage img) {
 		
-		Nodo nodito = new Nodo(new Rectangulo(1, 1, img.getHeight()));
-		QuadTree Arbol = new QuadTree(imagenToArbol(img, nodito));
-		return Arbol;
+		Nodo root = new Nodo(new Rectangulo(1, 1, img.getHeight()));
+		imagenToArbol(img, root,1,1);
+		QuadTree arbol = new QuadTree(root);
+		//arbol=crearArbolPrueba();
+	
+		
+		//try {
+//			arbol.recorrer();
+//		} catch (ExceptionNodo e) {
+//			e.printStackTrace();
+//		}
+		
+		return arbol;
 	}
 	
-	public Nodo imagenToArbol(BufferedImage img, Nodo r) {
-		if(img.getWidth()==1) return new Nodo(new Rectangulo(img.getMinX(),img.getMinY(),1), new Color(img.getRGB(img.getMinX(),img.getMinY())));
-		else {
-			r.setNw(new Nodo(new Rectangulo(1, 1, img.getWidth()/2)));
-			r.setNw(imagenToArbol(img.getSubimage(1, 1, img.getWidth()/2, img.getHeight()/2), r.getNw()));
+	public void imagenToArbol(BufferedImage img, Nodo r,int x,int y) {
+		if(img.getWidth()==32) {
+//			r.setNw(new Nodo(new Rectangulo(x,y,8), new Color(img.getRGB(img.getMinX(),img.getMinY()))));
+//			r.setNe(new Nodo(new Rectangulo(8,y,8), new Color(img.getRGB(img.getMinX(),img.getMinY()))));
+//			r.setSe(new Nodo(new Rectangulo(8,8,8), new Color(img.getRGB(img.getMinX(),img.getMinY()))));
+//			r.setSw(new Nodo(new Rectangulo(x,8,8), new Color(img.getRGB(img.getMinX(),img.getMinY()))));
 			
-			r.setNe(new Nodo(new Rectangulo(img.getWidth()/2, 1, img.getWidth()/2)));
-			r.setNe(imagenToArbol(img.getSubimage(img.getWidth()/2, 1, img.getWidth()/2, img.getHeight()/2), r.getNe()));
+			r.setNw(new Nodo(new Rectangulo(x,y,16), Color.blue));
+			r.setNe(new Nodo(new Rectangulo(x+16,y,16), Color.red));
+			r.setSe(new Nodo(new Rectangulo(x+16,y+16,16), Color.green));
+			r.setSw(new Nodo(new Rectangulo(x,y+16,16), Color.CYAN));
 			
-			r.setSe(new Nodo(new Rectangulo(img.getWidth()/2, img.getHeight()/2, img.getWidth()/2)));
-			r.setSe(imagenToArbol(img.getSubimage(img.getWidth()/2, img.getHeight()/2, img.getWidth()/2, img.getHeight()/2), r.getSe()));
+		}else {
+			try {
+				
+				r.setNw(new Nodo(new Rectangulo(x, y, img.getWidth()/2)));
+				r.setNe(new Nodo(new Rectangulo(x+img.getWidth()/2, y, img.getWidth()/2)));
+				r.setSe(new Nodo(new Rectangulo(x+img.getWidth()/2, y+img.getHeight()/2, img.getWidth()/2)));
+				r.setSw(new Nodo(new Rectangulo(x, y+img.getHeight()/2, img.getWidth()/2)));
+				
+				
+	
+				System.out.println("x :"+x+" y: "+y+" antes de empezar particiones"+" h: "+img.getHeight()/2);
+				System.out.println(img.getSubimage(x, y, img.getWidth()/2, img.getHeight()/2));
+				imagenToArbol(img.getSubimage(x, y, img.getWidth()/2, img.getHeight()/2), r.getNw(),x,y);
+				
+				
+				x=img.getWidth()/2;
+				
+				System.out.println("x: "+x+" antes de entrar a subpartir 2"+" y:"+y);
+				imagenToArbol(img.getSubimage(x, y, img.getWidth()/2, img.getHeight()/2), r.getNe(),x,y);
+				
 			
-			r.setSw(new Nodo(new Rectangulo(1, img.getHeight()/2, img.getWidth()/2)));
-			r.setSw(imagenToArbol(img.getSubimage(1, img.getHeight()/2, img.getWidth()/2, img.getHeight()/2), r.getSw()));
+				y=img.getWidth()/2;
+				
+				System.out.println("y: "+y+" antes de entrar a subpartir 3");
+				imagenToArbol(img.getSubimage(x, y, img.getWidth()/2, img.getHeight()/2), r.getSe(),x,y);
+			
+				x-=img.getWidth()/2-1;
+				
+				System.out.println("x: "+x+" antes de entrar a subpartir 4");
+				imagenToArbol(img.getSubimage(x, y, img.getWidth()/2, img.getHeight()/2), r.getSw(),x,y);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
-		return r;
+			
+		
 		
 	}
 

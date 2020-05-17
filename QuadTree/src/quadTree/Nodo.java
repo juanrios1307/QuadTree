@@ -4,6 +4,21 @@ import java.awt.*;
 
 public class Nodo {
 
+	@Override
+	public String toString() {
+		if(isHoja()) {
+			return "padre: "+getPadre()+" color: "+getColor().getRGB();
+		}else {
+			if(getPadre()!=null)
+				return "padre: "+getPadre().getRect().getX()+" nw: "+getNw().getRect().getX()
+					+" ne: "+getNe().getRect().getX()+" se: "+getSe().getRect().getX()+" sw: "+getSw().getRect().getX();
+			else {
+				return "padre: null"+" nw: "+getNw().getRect().getX()
+						+" ne: "+getNe().getRect().getX()+" se: "+getSe().getRect().getX()+" sw: "+getSw().getRect().getX();
+			}
+		}
+	}
+
 	private Rectangulo rect;
 	private Color color;
 	private Nodo nw, ne, se, sw, padre;
