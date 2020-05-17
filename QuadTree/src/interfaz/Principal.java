@@ -14,13 +14,11 @@ public class Principal {
                 try {
                 	//InterfazEntrada guiEntrada=new InterfazEntrada();
                 	BufferedImage img = null;
-        		    img = ImageIO.read(new File("/home/juan-rios/Descargas/download.jpeg"));
+        		    img = ImageIO.read(new File("/home/juan-rios/Descargas/download.jpg"));
         		    ProcesosArbol process=new ProcesosArbol();
                 	InterfazFigura guiEntrada=new InterfazFigura(process.arbolToImagen(process.imagenToArbol(img)));
+                	
                 	guiEntrada.setVisible(true);   
-            		
-                	
-                	
             		
                 } catch (Exception e) {
                     e.printStackTrace();
