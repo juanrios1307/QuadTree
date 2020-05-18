@@ -42,9 +42,25 @@ public class QuadTree {
 
 	}
 
-	public int getPx() {
-		return (int) Math.pow(2, getRoot().altura());
-	}
+	public int cantHojas(){
+        
+        return cantHojas(root);
+    
+    }
+    
+    public int cantHojas(Nodo n){
+        if (n == null) {
+            return 0;
+        }
+        if(n.isHoja()) {
+            return 1;
+        }else {
+            return cantHojas(n.getNw())+cantHojas(n.getNe())+cantHojas(n.getSw())+cantHojas(n.getSe());
+        }
+        
+            
+    }
+	
 
 	
 }

@@ -27,18 +27,7 @@ public class InterfazFigura extends JFrame {
          jLabel.setBounds(20, 20, img.getWidth(), img.getHeight());
          contentPane.add(jLabel, BorderLayout.CENTER);
          
-         
-         //this.img=img;
-         //img.createGraphics();
 
     }
-    
-//    public void paint (Graphics g){
-//        super.paint(g);
-//    	
-//    	g.drawImage((Image)img, img.getWidth(),img.getHeight(),null);
-//            
-//    }
-    
 	
 }
