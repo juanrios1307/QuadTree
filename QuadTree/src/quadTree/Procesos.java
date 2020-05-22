@@ -21,35 +21,67 @@ public class Procesos extends JFrame{
 	public Procesos() {
 	}
 	
-	public QuadTree imagenToArbol(BufferedImage img) {
+	public QuadTree imageToArbol(BufferedImage img) {
 		lado=img.getHeight();
+		QuadTree arbol=new QuadTree(imagenToArbol(img));
 		
-		return new QuadTree(imgToArbol(img));
+		//optimizacion(arbol.getRoot());
+		
+		return arbol;
 	}
 	
-	public Nodo imgToArbol(BufferedImage img) {
+	public Nodo imagenToArbol(BufferedImage img) {
 		Nodo root = new Nodo();
 		
-		return imgToArbol(img, root);
+		return imagenToArbol(img, root);
 	}
 	
-	public Nodo imgToArbol(BufferedImage img, Nodo r){	
+	public Nodo imagenToArbol(BufferedImage img, Nodo r){	
 		if(img.getWidth()==1) {
 			
 			Nodo hoja = new Nodo(new Color(img.getRGB(img.getMinX(),img.getMinY())));
 			return hoja;
 		}
 		else {
-			r.setNw(imgToArbol(nw(img)));
-			r.setNe(imgToArbol(ne(img)));
-			r.setSe(imgToArbol(se(img)));
-			r.setSw(imgToArbol(sw(img)));
+			r.setNw(imagenToArbol(nw(img)));
+			r.setNe(imagenToArbol(ne(img)));
+			r.setSe(imagenToArbol(se(img)));
+			r.setSw(imagenToArbol(sw(img)));
 		}
 		return r;	
 	}
 	
 	public void optimizacion(Nodo r) {
-		
+		if(r.isHoja()) {
+			Nodo padre=r.getPadre();
+			if(iguales(padre)) {
+				padre.setColor(r.getColor());
+			}
+			
+		}else {
+			optimizacion(r.getNw());
+			optimizacion(r.getNe());
+			optimizacion(r.getSe());
+			optimizacion(r.getSw());
+			
+		}
+	}
+	
+	public boolean iguales(Nodo r) {
+		Nodo nw=r.getNw();
+		Nodo ne=r.getNe();
+		Nodo sw=r.getSw();
+		Nodo se=r.getSe();
+		if((nw.isHoja())&& ne.isHoja() && se.isHoja() && sw.isHoja()&&
+			nw.getColor().equals(ne.getColor()) &&
+			nw.getColor().equals(se.getColor()) &&
+			nw.getColor().equals(sw.getColor()) &&
+			ne.getColor().equals(se.getColor()) &&
+			ne.getColor().equals(sw.getColor()) &&
+			se.getColor().equals(sw.getColor()) ) {
+			return true;
+		}else
+			return false;
 	}
 
 	public BufferedImage nw(BufferedImage img){

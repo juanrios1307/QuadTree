@@ -14,18 +14,15 @@ public class Principal {
                 try {
                 	//InterfazEntrada guiEntrada=new InterfazEntrada();
                 	BufferedImage img = null;
-        		    img = ImageIO.read(new File("/home/juan-rios/git/QuadTree/QuadTree/images/download.png" ));
+        		    img = ImageIO.read(new File("/home/juan-rios/git/QuadTree/QuadTree/images/download5.png" ));
         		    
         		    Procesos process=new Procesos();
+        		    
         		    long inicio=System.currentTimeMillis();
-
-        		    QuadTree arbol=process.imagenToArbol(img);
-        		   
+        		    QuadTree arbol=process.imageToArbol(img);
         		    long fin=System.currentTimeMillis();
-                	
+        		    
                 	System.out.println("Tiempo: "+(fin-inicio));
-                	
-                	
                 	InterfazFigura guiEntrada=new InterfazFigura(process.arbolToImagen(arbol));
                 	
                 	
