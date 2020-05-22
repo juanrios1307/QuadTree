@@ -14,38 +14,25 @@ public class Principal {
                 try {
                 	//InterfazEntrada guiEntrada=new InterfazEntrada();
                 	BufferedImage img = null;
-        		    img = ImageIO.read(new File("/home/juan-rios/git/QuadTree/QuadTree/images/download.png" ));
-        		    ProcesosArbolAux process=new ProcesosArbolAux();
+        		    img = ImageIO.read(new File("/home/juan-rios/git/QuadTree/QuadTree/images/download5.png" ));
         		    
+        		    Procesos process=new Procesos();
+        		 // ProcesosArbol process=new ProcesosArbol();
         		    long inicio=System.currentTimeMillis();
         		    
         		    
-        		    QuadTree arbol=process.imageToArbol(img);
-        		    
-        		    Nodo aux=arbol.getRoot();
-        		    
-        		    System.out.println(aux.altura());
-        		    
-        		    while(aux != null) {
-        		    	 System.out.println(aux.nivelNodo());
-        		    	 aux=aux.getNw();
-        		    }
-        		    
-        		    process.aToI(arbol);
+        		    QuadTree arbol=process.imagenToArbol(img);
         		   
+        		    long fin=System.currentTimeMillis();
+                	
+                	System.out.println("Tiempo: "+(fin-inicio));
         		    
-        		    
-        		    
-//        		    long fin=System.currentTimeMillis();
-//                	
-//                	System.out.println("Tiempo: "+(fin-inicio));
-//        		    
-//                	System.out.println("Hojas:"+arbol.cantHojas());
-//                	
-//                	InterfazFigura guiEntrada=new InterfazFigura(process.arbolToImagen(arbol));
+                	System.out.println("Hojas:"+arbol.cantHojas());
+                	
+                	InterfazFigura guiEntrada=new InterfazFigura(process.arbolToImagen(arbol));
                 	
                 	
-      //          	guiEntrada.setVisible(true);   
+              	guiEntrada.setVisible(true);   
             		
                 } catch (Exception e) {
                     e.printStackTrace();

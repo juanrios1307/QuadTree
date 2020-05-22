@@ -11,11 +11,11 @@ import javax.swing.JFrame;
 
 import interfaz.InterfazFigura;
 
-public class ProcesosArbol extends JFrame{
+public class ProcesoAux extends JFrame{
 	
 	BufferedImage imagen;
 	
-	public ProcesosArbol() {
+	public ProcesoAux() {
 	}
 	
 public QuadTree imagenToArbol(BufferedImage img) {
@@ -42,16 +42,6 @@ public QuadTree imagenToArbol(BufferedImage img) {
 	public void imagenToArbol(BufferedImage img, Nodo r,int x,int y,int xI,int yI) {
 		if(img.getWidth()==4) {
 			r.setColor(new Color(img.getRGB(1, 1)));
-			
-			if(coloresIguales(r.getPadre())) {
-				r.getPadre().setColor(r.getColor());
-				
-				r.getPadre().setNw(null);
-				r.getPadre().setSw(null);
-				r.getPadre().setNe(null);
-				r.getPadre().setSe(null);
-			}
-			
 			
 //			r.setNw(new Nodo(new Rectangulo(x,y,1), new Color(img.getRGB(1,1))));
 //			r.setNe(new Nodo(new Rectangulo(1,y,1), new Color(img.getRGB(1,1))));

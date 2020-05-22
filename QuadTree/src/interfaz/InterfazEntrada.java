@@ -32,13 +32,13 @@ public class InterfazEntrada extends JFrame{
 	//Metodo addBotonConvertir 
 	
 	private void convertir(BufferedImage img) throws ExceptionNodo{
-		ProcesosArbol process=new ProcesosArbol();
+		ProcesoAux process=new ProcesoAux();
 		
 		convertir(process.imagenToArbol(img));
 	}
 	
 	private void convertir(QuadTree arbol) throws ExceptionNodo {
-		InterfazFigura figura=new InterfazFigura(new ProcesosArbol().arbolToImagen(arbol));
+		InterfazFigura figura=new InterfazFigura(new ProcesoAux().arbolToImagen(arbol));
 		figura.setVisible(true);
 		this.setVisible(false);
 	}

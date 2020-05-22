@@ -8,49 +8,42 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
-public class ProcesosArbolAux extends JFrame{
+public class Procesos extends JFrame{
 	
 	Graphics G;
 	int lado=1;
 	BufferedImage imagen;
 	
-	public ProcesosArbolAux(Graphics G) {
+	public Procesos(Graphics G) {
 		this.G=G;
 	}
 	
-	public ProcesosArbolAux() {
+	public Procesos() {
 	}
 	
-	public QuadTree imageToArbol(BufferedImage img) {
+	public QuadTree imagenToArbol(BufferedImage img) {
 		lado=img.getHeight();
 		
-		return new QuadTree(imagenToArbol(img));
+		return new QuadTree(imgToArbol(img));
 	}
 	
-	public Nodo imagenToArbol(BufferedImage img) {
+	public Nodo imgToArbol(BufferedImage img) {
 		Nodo root = new Nodo(new Rectangulo(1, 1, img.getHeight()));
 		
-		return imagenToArbol(img, root);
+		return imgToArbol(img, root);
 	}
 	
-	public Nodo imagenToArbol(BufferedImage img, Nodo r){	
-		if(img.getWidth()==16) {
-			System.out.println("entro al condicional!");
+	public Nodo imgToArbol(BufferedImage img, Nodo r){	
+		if(img.getWidth()==4) {
+			
 			Nodo hoja = new Nodo(new Color(img.getRGB(img.getMinX(),img.getMinY())));
 			return hoja;
 		}
 		else {
-			System.out.println(img.getHeight()*img.getTileWidth() + " pixeles y lado "+img.getWidth()+" NW ");
-			r.setNw(imagenToArbol(nw(img)));
-			
-			System.out.println(img.getHeight()*img.getTileWidth() + " pixeles y lado "+img.getWidth()+" NE ");
-			r.setNe(imagenToArbol(ne(img)));
-			
-			System.out.println(img.getHeight()*img.getTileWidth() + " pixeles y lado "+img.getWidth()+" SE ");
-			r.setSe(imagenToArbol(se(img)));
-			
-			System.out.println(img.getHeight()*img.getTileWidth() + " pixeles y lado "+img.getWidth()+" SW ");
-			r.setSw(imagenToArbol(sw(img)));
+			r.setNw(imgToArbol(nw(img)));
+			r.setNe(imgToArbol(ne(img)));
+			r.setSe(imgToArbol(se(img)));
+			r.setSw(imgToArbol(sw(img)));
 		}
 		return r;	
 	}
@@ -68,37 +61,40 @@ public class ProcesosArbolAux extends JFrame{
 		return img.getSubimage(0, img.getHeight()/2, img.getWidth()/2, img.getHeight()/2);	
 	}
 	
-	public BufferedImage aToI(QuadTree arbol) {
+	public BufferedImage arbolToImagen(QuadTree arbol) {
 		
 		imagen = new BufferedImage(lado, lado, BufferedImage.TYPE_INT_RGB);
 		System.out.println(imagen.getHeight());
 		
 		Graphics2D g=imagen.createGraphics();
 		
-		return arbolToImagen(arbol.getRoot(),g, lado,0,0);
+		return arbolToImagen(arbol.getRoot(),g, lado,1,1);
 	}
 
 	
 	public BufferedImage arbolToImagen(Nodo n, Graphics2D g, int res,int x,int y) {
 		if (n.isHoja()) {
-			Nodo padreHojas= n.getPadre();
 			pintar(x,y,res/2,n.getColor());
 		}
 		else {
-			BufferedImage nw=arbolToImagen(n.getNw(),g,res/2,x,y);
 			
-			BufferedImage ne=arbolToImagen(n.getNe(),g,res/2,x,y);
+			arbolToImagen(n.getNw(),g,res/2,x,y);
 			
-			BufferedImage se=arbolToImagen(n.getSe(),g,res/2,x,y);
+			x+=res/2;
+			arbolToImagen(n.getNe(),g,res/2,x,y);
 			
-			BufferedImage sw=arbolToImagen(n.getSw(),g,res/2,x,y);
+			y+=res/2;
+			arbolToImagen(n.getSe(),g,res/2,x,y);
+			
+			x-=res/2;
+			arbolToImagen(n.getSw(),g,res/2,x,y);
 			
 //			g.drawImage(nw, 0, 0, null);
 //			g.drawImage(ne, nw.getWidth(), 0, null);
 //			g.drawImage(se, nw.getWidth(), nw.getHeight(), null);
 //			g.drawImage(sw, 0, nw.getHeight(), null);
 		}
-		return null;
+		return imagen;
 	}
 	
 	public void pintar(int x,int y,int lado,Color color) {
@@ -116,28 +112,6 @@ public class ProcesosArbolAux extends JFrame{
 		}
 
 	}
-	
-	
-	
-	
-	public void asignarPadres(Nodo b){
-		if(b==null) {	
-		}
-		else if(b.getNe()!=null) {
-			b.getNw().setPadre(b);
-			b.getNe().setPadre(b);
-			b.getSe().setPadre(b);
-			b.getSw().setPadre(b);
-		}
-		else {
-			asignarPadres(b.getNw());
-			asignarPadres(b.getNe());
-			asignarPadres(b.getSe());
-			asignarPadres(b.getSw());
-		}
-		System.out.println("asignoPadres");
-	}	
-	
 
 	public static QuadTree crearArbolPrueba() {
 		
