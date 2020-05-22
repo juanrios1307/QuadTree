@@ -13,13 +13,12 @@ public class QuadTree {
 	}
 
 	public void recorrer() throws ExceptionNodo {
-		recorrer(root," ");
+		recorrer(root,".");
 	}
 	
 	public void recorrer(Nodo r,String append) throws ExceptionNodo{
 		if(!r.isHoja()){
 			System.out.println(append+r);
-			
 				
 			recorrer(r.getNw(),append+append);
 			recorrer(r.getNe(),append+append);		
@@ -31,33 +30,25 @@ public class QuadTree {
 		
 		}
 	}
-	
-	public void insertar(Nodo r) throws ExceptionNodo{
 
-	}
-
-	public void eliminar(Nodo r) throws ExceptionNodo{
-
-	}
-
-	public int cantHojas(){
-        
-        return cantHojas(root);
-    
-    }
-    
-    public int cantHojas(Nodo n){
-        if (n == null) {
-            return 0;
-        }
-        if(n.isHoja()) {
-            return 1;
-        }else {
-            return cantHojas(n.getNw())+cantHojas(n.getNe())+cantHojas(n.getSw())+cantHojas(n.getSe());
-        }
-        
-            
-    }
+//	public int cantHojas(){
+//        
+//        return cantHojas(root);
+//    
+//    }
+//    
+//    public int cantHojas(Nodo n){
+//        if (n == null) {
+//            return 0;
+//        }
+//        if(n.isHoja()) {
+//            return 1;
+//        }else {
+//            return cantHojas(n.getNw())+cantHojas(n.getNe())+cantHojas(n.getSw())+cantHojas(n.getSe());
+//        }
+//        
+//            
+//    }
 	
 
 	

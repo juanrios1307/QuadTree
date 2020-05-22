@@ -6,20 +6,9 @@ public class Nodo {
 
 	@Override
 	public String toString() {
-		if(isHoja()) {
-			return "padre: "+getPadre()+" color: "+getColor().getRGB();
-		}else {
-			if(getPadre()!=null)
-				return "padre: "+getPadre().getRect().getX()+" nw: "+getNw().getRect().getX()
-					+" ne: "+getNe().getRect().getX()+" se: "+getSe().getRect().getX()+" sw: "+getSw().getRect().getX();
-			else {
-				return "padre: null"+" nw: "+getNw().getRect().getX()
-						+" ne: "+getNe().getRect().getX()+" se: "+getSe().getRect().getX()+" sw: "+getSw().getRect().getX();
-			}
-		}
+		return hoja?"color: "+color.getRGB():"padre: nivel: "+nivelNodo(); 
 	}
-	private int lado;
-	private Rectangulo rect;
+	
 	private Color color;
 	private Nodo nw, ne, se, sw, padre;
 	private boolean hoja;
@@ -36,16 +25,8 @@ public class Nodo {
 		this.hoja = true;
 	}
 	
-	public Nodo(Rectangulo rect, Color color) {
+	public Nodo() {
 		super();
-		this.rect = rect;
-		this.color = color;
-		this.hoja = true;
-	}
-	
-	public Nodo(Rectangulo rect) {
-		super();
-		this.rect = rect;
 	}
 
 	// -----------------------------------------------------------------------------------------------------
@@ -60,10 +41,6 @@ public class Nodo {
 
 	public void setPadre(Nodo padre) {
 		this.padre = padre;
-	}
-
-	public Rectangulo getRect() {
-		return rect;
 	}
 
 	public Nodo getNw() {
@@ -100,10 +77,6 @@ public class Nodo {
 	public void setSw(Nodo sw) {
 		sw.setPadre(this);
 		this.sw = sw;
-	}
-
-	public void setRect(Rectangulo rect) {
-		this.rect = rect;
 	}
 
 	public Color getColor() {
