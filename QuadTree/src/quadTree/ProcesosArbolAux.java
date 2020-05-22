@@ -82,7 +82,7 @@ public class ProcesosArbolAux extends JFrame{
 	public BufferedImage arbolToImagen(Nodo n, Graphics2D g, int res,int x,int y) {
 		if (n.isHoja()) {
 			Nodo padreHojas= n.getPadre();
-			pintar(0,0,res/2,n.getColor());
+			pintar(x,y,res/2,n.getColor());
 		}
 		else {
 			BufferedImage nw=arbolToImagen(n.getNw(),g,res/2,x,y);
