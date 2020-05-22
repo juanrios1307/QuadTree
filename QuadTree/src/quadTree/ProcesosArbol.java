@@ -26,9 +26,32 @@ public QuadTree imagenToArbol(BufferedImage img) {
 		return arbol;
 	}
 	
+	public boolean coloresIguales(Nodo r) {
+		if(r.getNw().getColor().equals(r.getNe().getColor()) && 
+				r.getNw().getColor().equals(r.getSw().getColor()) && 
+				r.getNw().getColor().equals(r.getNw().getColor()) && 
+				r.getNe().getColor().equals(r.getSw().getColor()) &&
+				r.getNe().getColor().equals(r.getSe().getColor()) &&
+				r.getSe().getColor().equals(r.getSw().getColor())) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
 	public void imagenToArbol(BufferedImage img, Nodo r,int x,int y,int xI,int yI) {
-		if(img.getWidth()==2) {
+		if(img.getWidth()==4) {
 			r.setColor(new Color(img.getRGB(1, 1)));
+			
+			if(coloresIguales(r.getPadre())) {
+				r.getPadre().setColor(r.getColor());
+				
+				r.getPadre().setNw(null);
+				r.getPadre().setSw(null);
+				r.getPadre().setNe(null);
+				r.getPadre().setSe(null);
+			}
+			
 			
 //			r.setNw(new Nodo(new Rectangulo(x,y,1), new Color(img.getRGB(1,1))));
 //			r.setNe(new Nodo(new Rectangulo(1,y,1), new Color(img.getRGB(1,1))));

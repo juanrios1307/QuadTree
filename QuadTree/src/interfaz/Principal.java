@@ -14,23 +14,38 @@ public class Principal {
                 try {
                 	//InterfazEntrada guiEntrada=new InterfazEntrada();
                 	BufferedImage img = null;
-        		    img = ImageIO.read(new File("/home/juan-rios/git/QuadTree/QuadTree/images/download5.png" ));
-        		    ProcesosArbol process=new ProcesosArbol();
+        		    img = ImageIO.read(new File("/home/juan-rios/git/QuadTree/QuadTree/images/download.png" ));
+        		    ProcesosArbolAux process=new ProcesosArbolAux();
         		    
         		    long inicio=System.currentTimeMillis();
         		    
-        		    QuadTree arbol=process.imagenToArbol(img);
         		    
-        		    long fin=System.currentTimeMillis();
-                	
-                	System.out.println("Tiempo: "+(fin-inicio));
+        		    QuadTree arbol=process.imageToArbol(img);
         		    
-                	System.out.println("Hojas:"+arbol.cantHojas());
+        		    Nodo aux=arbol.getRoot();
+        		    
+        		    System.out.println(aux.altura());
+        		    
+        		    while(aux != null) {
+        		    	 System.out.println(aux.nivelNodo());
+        		    	 aux=aux.getNw();
+        		    }
+        		    
+        		    process.aToI(arbol);
+        		   
+        		    
+        		    
+        		    
+//        		    long fin=System.currentTimeMillis();
+//                	
+//                	System.out.println("Tiempo: "+(fin-inicio));
+//        		    
+//                	System.out.println("Hojas:"+arbol.cantHojas());
+//                	
+//                	InterfazFigura guiEntrada=new InterfazFigura(process.arbolToImagen(arbol));
                 	
-                	InterfazFigura guiEntrada=new InterfazFigura(process.arbolToImagen(arbol));
                 	
-                	
-                	guiEntrada.setVisible(true);   
+      //          	guiEntrada.setVisible(true);   
             		
                 } catch (Exception e) {
                     e.printStackTrace();

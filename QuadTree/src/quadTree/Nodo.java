@@ -18,7 +18,7 @@ public class Nodo {
 			}
 		}
 	}
-
+	private int lado;
 	private Rectangulo rect;
 	private Color color;
 	private Nodo nw, ne, se, sw, padre;
@@ -29,12 +29,23 @@ public class Nodo {
 	public Nodo getPadre() {
 		return padre;
 	}
-
+	
+	public Nodo(Color color) {
+		super();
+		this.color = color;
+		this.hoja = true;
+	}
+	
 	public Nodo(Rectangulo rect, Color color) {
 		super();
 		this.rect = rect;
 		this.color = color;
 		this.hoja = true;
+	}
+	
+	public Nodo(Rectangulo rect) {
+		super();
+		this.rect = rect;
 	}
 
 	// -----------------------------------------------------------------------------------------------------
@@ -45,11 +56,6 @@ public class Nodo {
 
 	public void setHoja(boolean hoja) {
 		this.hoja = hoja;
-	}
-
-	public Nodo(Rectangulo rect) {
-		super();
-		this.rect = rect;
 	}
 
 	public void setPadre(Nodo padre) {
@@ -125,9 +131,9 @@ public class Nodo {
 		return Math.max(Math.max(nw, ne), Math.max(sw, se));
 	}
 
-	public int nivelNodo(Nodo e) {
-		int nivel = 0;
-		Nodo hijo = e;
+	public int nivelNodo() {
+		int nivel = 1;
+		Nodo hijo = this;
 
 		while (hijo.getPadre() != null) {
 			nivel++;

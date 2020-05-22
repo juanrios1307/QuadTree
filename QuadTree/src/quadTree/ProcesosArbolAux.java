@@ -8,37 +8,39 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
-public class ProcesosArbol extends JFrame{
+public class ProcesosArbolAux extends JFrame{
 	
 	Graphics G;
-	static QuadTree arbol;
+	int lado=1;
+	BufferedImage imagen;
 	
-	public ProcesosArbol(Graphics G) {
+	public ProcesosArbolAux(Graphics G) {
 		this.G=G;
 	}
 	
-	public ProcesosArbol() {
+	public ProcesosArbolAux() {
+	}
+	
+	public QuadTree imageToArbol(BufferedImage img) {
+		lado=img.getHeight();
+		
+		return new QuadTree(imagenToArbol(img));
 	}
 	
 	public Nodo imagenToArbol(BufferedImage img) {
-		
 		Nodo root = new Nodo(new Rectangulo(1, 1, img.getHeight()));
-		//try {
-//			arbol.recorrer();
-//		} catch (ExceptionNodo e) {
-//			e.printStackTrace();
-//		}
 		
 		return imagenToArbol(img, root);
 	}
+	
 	public Nodo imagenToArbol(BufferedImage img, Nodo r){	
-		if(img.getWidth()==64) {
+		if(img.getWidth()==16) {
 			System.out.println("entro al condicional!");
-			Nodo lolo = new Nodo( new Color(img.getRGB(img.getMinX(),img.getMinY())));
-			return lolo;
+			Nodo hoja = new Nodo(new Color(img.getRGB(img.getMinX(),img.getMinY())));
+			return hoja;
 		}
 		else {
-			System.out.println(img.getHeight()*img.getTileWidth() + " pixeles y lado "+img.getWidth());
+			System.out.println(img.getHeight()*img.getTileWidth() + " pixeles y lado "+img.getWidth()+" NW ");
 			r.setNw(imagenToArbol(nw(img)));
 			
 			System.out.println(img.getHeight()*img.getTileWidth() + " pixeles y lado "+img.getWidth()+" NE ");
@@ -66,35 +68,58 @@ public class ProcesosArbol extends JFrame{
 		return img.getSubimage(0, img.getHeight()/2, img.getWidth()/2, img.getHeight()/2);	
 	}
 	
-	public BufferedImage aToI(QuadTree gay) {
-//		int altura = gay.getRoot().altura();
-//		int lado = (int) Math.pow(2, altura);
-		BufferedImage img = new BufferedImage((int)Math.pow(2, gay.getRoot().altura()), (int)Math.pow(2, gay.getRoot().altura()), BufferedImage.TYPE_INT_RGB);
-		Graphics2D g = img.createGraphics();
-		return aToI(g, gay.getRoot());
-	}
-	public BufferedImage aToI(Nodo n) {
+	public BufferedImage aToI(QuadTree arbol) {
 		
+		imagen = new BufferedImage(lado, lado, BufferedImage.TYPE_INT_RGB);
+		System.out.println(imagen.getHeight());
+		
+		Graphics2D g=imagen.createGraphics();
+		
+		return arbolToImagen(arbol.getRoot(),g, lado,0,0);
 	}
-	public BufferedImage aToI(Nodo n, Graphics2D g, int res) {
+
+	
+	public BufferedImage arbolToImagen(Nodo n, Graphics2D g, int res,int x,int y) {
 		if (n.isHoja()) {
 			Nodo padreHojas= n.getPadre();
-			BufferedImage img1 = new BufferedImage(128, 128, BufferedImage.TYPE_INT_RGB);
+			pintar(0,0,res/2,n.getColor());
 		}
 		else {
-			BufferedImage nw=aToI(n.getNw());
-			BufferedImage ne=aToI(n.getNe());
-			BufferedImage se=aToI(n.getSe());
-			BufferedImage sw=aToI(n.getSw());
+			BufferedImage nw=arbolToImagen(n.getNw(),g,res/2,x,y);
 			
-			g.drawImage(nw, 0, 0, null);
-			g.drawImage(ne, nw.getWidth(), 0, null);
-			g.drawImage(se, nw.getWidth(), nw.getHeight(), null);
-			g.drawImage(sw, 0, nw.getHeight(), null);
+			BufferedImage ne=arbolToImagen(n.getNe(),g,res/2,x,y);
+			
+			BufferedImage se=arbolToImagen(n.getSe(),g,res/2,x,y);
+			
+			BufferedImage sw=arbolToImagen(n.getSw(),g,res/2,x,y);
+			
+//			g.drawImage(nw, 0, 0, null);
+//			g.drawImage(ne, nw.getWidth(), 0, null);
+//			g.drawImage(se, nw.getWidth(), nw.getHeight(), null);
+//			g.drawImage(sw, 0, nw.getHeight(), null);
 		}
-		
+		return null;
 	}
-		
+	
+	public void pintar(int x,int y,int lado,Color color) {
+		try {
+			if(lado>1) {	
+				for (int i = 0; i < lado; i++) {
+					for (int j = 0; j < lado; j++) {
+						imagen.setRGB(x+i, y+j, color.getRGB());
+					}
+				}
+			}else
+				imagen.setRGB(x, y, color.getRGB());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	
+	
+	
 	public void asignarPadres(Nodo b){
 		if(b==null) {	
 		}
@@ -113,90 +138,6 @@ public class ProcesosArbol extends JFrame{
 		System.out.println("asignoPadres");
 	}	
 	
-	public double alturaNodosky(Nodo b) {
-		double i=0;
-		while(b.getPadre()!=null)i++;
-		return i;
-	}
-	
-//	public BufferedImage nw(BufferedImage img){
-//		return img.getSubimage(1, 1, img.getWidth()/2, img.getHeight()/2);
-//	}
-//	public BufferedImage ne(BufferedImage img){		
-//		return img.getSubimage(img.getWidth()/2, 1, img.getWidth()/2, img.getHeight()/2);
-//	}
-//	public BufferedImage nw(){
-//		
-//	}
-//	public BufferedImage se(BufferedImage img){
-//		return img.getSubimage(img.getWidth()/2, img.getHeight()/2, img.getWidth()/2, img.getHeight()/2);
-//		
-//	}
-//	public BufferedImage sw(BufferedImage img){
-//		return img.getSubimage(1, img.getHeight()/2, img.getWidth()/2, img.getHeight()/2);
-//		
-//	}
-	
-	
-	
-	public void arbolToImagen(QuadTree arbol) throws ExceptionNodo {
-		//int px=(int) Math.pow(2, arbol.getAltura());
-		
-		arbolToImagen(arbol.getRoot(),2);
-	}
-	public void arbolToImagen(Nodo r,int h) throws ExceptionNodo{
-		
-		//int lado=(int)Math.pow(2, r.getAltura())*20;
-		if(!r.isHoja()){
-
-			dividir(r.getRect().getX(), r.getRect().getY(), r.getRect().getLado());
-			//dividir(r.getRect().getX(), r.getRect().getY(), lado);
-			
-			Nodo aux=r;
-			if(aux.getNw() != null){
-				arbolToImagen(aux.getNw(),h);
-				
-			}
-			if(aux.getNe() != null){
-				arbolToImagen(aux.getNe(), h);
-				
-			}
-			if(aux.getSe() != null){
-				arbolToImagen(aux.getSe(),h);
-				
-			}
-			if(aux.getSw() != null){
-				arbolToImagen(aux.getSw(),h);
-				
-			}
-		}else{
-			Nodo aux=r;
-			pintar(aux.getRect().getX(),aux.getRect().getY(),aux.getRect().getLado(),aux.getColor());
-			
-		}
-	}
-	
-	
-	public Graphics pintar(int x,int y,int l,Color color) {
-		super.paint(G);
-		G.setColor(color);
-		G.fillRect(x, y, l, l);
-		
-		return G;
-	}
-	
-	public Graphics dividir(int x,int y,int l){
-		//se va a poner cuadricula de la imagen
-		super.paint(G);
-		G.setColor(Color.black.darker());
-		//G.drawRect(x, y, l, l);
-		
-		G.drawLine(x, y+l/2, x+l, y+l/2);
-		
-		G.drawLine(x+l/2, y, x+l/2, y+l);
-		
-		return G;
-	}
 
 	public static QuadTree crearArbolPrueba() {
 		
