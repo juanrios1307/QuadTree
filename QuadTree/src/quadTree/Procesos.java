@@ -29,11 +29,43 @@ public class Procesos extends JFrame{
 		
 		return arbol;
 	}
-	
 	public Nodo imagenToArbol(BufferedImage img) {
 		Nodo root = new Nodo();
 		
 		return imagenToArbol(img, root);
+	}
+	public Nodo imagenToArbol(BufferedImage img, Nodo r){	
+		if(img.getWidth()==1) {
+			
+			//Nodo hoja = new Nodo((promedio(img)));
+			Nodo hoja=new Nodo(new Color(img.getRGB(0, 0)));
+			return hoja;
+		}
+		else {
+			if(img.getHeight()==8) {
+				Nodo nw = new Nodo((promedio(nw(img))));
+				Nodo ne = new Nodo((promedio(ne(img))));
+				Nodo se = new Nodo((promedio(se(img))));
+				Nodo sw = new Nodo((promedio(sw(img))));
+				
+				if(nw.getColor()==ne.getColor()&&ne.getColor()==se.getColor()&&se.getColor()==sw.getColor()){
+					return nw;
+				}
+				else {
+					r.setNw(imagenToArbol(nw(img)));
+					r.setNe(imagenToArbol(ne(img)));
+					r.setSe(imagenToArbol(se(img)));
+					r.setSw(imagenToArbol(sw(img)));
+				}
+			}
+			else {
+			r.setNw(imagenToArbol(nw(img)));
+			r.setNe(imagenToArbol(ne(img)));
+			r.setSe(imagenToArbol(se(img)));
+			r.setSw(imagenToArbol(sw(img)));
+			}
+		}
+		return r;	
 	}
 	
 	public Color promedio(BufferedImage img) {
@@ -47,22 +79,6 @@ public class Procesos extends JFrame{
 		}
 		
 		return new Color(r/4,g/4,b/4);
-	}
-	
-	public Nodo imagenToArbol(BufferedImage img, Nodo r){	
-		if(img.getWidth()==4) {
-			
-			//Nodo hoja = new Nodo((promedio(img)));
-			Nodo hoja=new Nodo(new Color(img.getRGB(0, 0)));
-			return hoja;
-		}
-		else {
-			r.setNw(imagenToArbol(nw(img)));
-			r.setNe(imagenToArbol(ne(img)));
-			r.setSe(imagenToArbol(se(img)));
-			r.setSw(imagenToArbol(sw(img)));
-		}
-		return r;	
 	}
 	
 	public void optimizacion(Nodo r) {
@@ -116,9 +132,7 @@ public class Procesos extends JFrame{
 		imagen = new BufferedImage(lado, lado, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g=imagen.createGraphics();
 		return arbolToImagen(arbol.getRoot(),g, lado,0,0);
-	}
-
-	
+	}	
 	public BufferedImage arbolToImagen(Nodo n, Graphics2D g, int res,int x,int y) {
 		if (n.isHoja()) {
 			pintar(x,y,res,n.getColor());
