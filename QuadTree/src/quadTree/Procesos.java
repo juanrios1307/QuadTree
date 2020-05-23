@@ -43,13 +43,13 @@ public class Procesos extends JFrame{
 		}
 		else {
 			if(img.getHeight()==8) {
-				Nodo nw = new Nodo((promedio(nw(img))));
-				Nodo ne = new Nodo((promedio(ne(img))));
-				Nodo se = new Nodo((promedio(se(img))));
-				Nodo sw = new Nodo((promedio(sw(img))));
+				Color nw = promedio(nw(img));
+				Color ne = promedio(ne(img));
+				Color se = promedio(sw(img));
+				Color sw = promedio(sw(img));
 				
-				if(nw.getColor()==ne.getColor()&&ne.getColor()==se.getColor()&&se.getColor()==sw.getColor()){
-					return nw;
+				if(nw==ne&&ne==se&&se==sw){
+					return new Nodo(nw);
 				}
 				else {
 					r.setNw(imagenToArbol(nw(img)));

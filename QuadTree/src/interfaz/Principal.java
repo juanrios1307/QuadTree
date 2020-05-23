@@ -14,7 +14,7 @@ public class Principal {
                 try {
                 	//InterfazEntrada guiEntrada=new InterfazEntrada();
                 	BufferedImage img = null;
-        		    img = ImageIO.read(new File("/home/juan-rios/git/QuadTree/QuadTree/images/download5.png" ));
+        		    img = ImageIO.read(new File("C:\\Users\\Decol\\git\\QuadTree\\QuadTree\\images\\download.png" ));
         		    
         		    Procesos process=new Procesos();
         		    
