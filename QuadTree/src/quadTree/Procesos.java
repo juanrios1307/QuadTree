@@ -36,10 +36,24 @@ public class Procesos extends JFrame{
 		return imagenToArbol(img, root);
 	}
 	
+	public Color promedio(BufferedImage img) {
+		int r=0,g=0,b=0;
+		for(int i=1;i<3;i++) {
+			for(int j=1;j<3;j++) {
+				r+=new Color(img.getRGB(i, j)).getRed();
+				b+=new Color(img.getRGB(i, j)).getBlue();
+				g+=new Color(img.getRGB(i, j)).getGreen();
+			}
+		}
+		
+		return new Color(r/4,g/4,b/4);
+	}
+	
 	public Nodo imagenToArbol(BufferedImage img, Nodo r){	
-		if(img.getWidth()==1) {
+		if(img.getWidth()==4) {
 			
-			Nodo hoja = new Nodo(new Color(img.getRGB(img.getMinX(),img.getMinY())));
+			//Nodo hoja = new Nodo((promedio(img)));
+			Nodo hoja=new Nodo(new Color(img.getRGB(0, 0)));
 			return hoja;
 		}
 		else {
@@ -107,7 +121,7 @@ public class Procesos extends JFrame{
 	
 	public BufferedImage arbolToImagen(Nodo n, Graphics2D g, int res,int x,int y) {
 		if (n.isHoja()) {
-			pintar(x,y,res/2,n.getColor());
+			pintar(x,y,res,n.getColor());
 		}else {
 			
 			arbolToImagen(n.getNw(),g,res/2,x,y);
@@ -128,13 +142,19 @@ public class Procesos extends JFrame{
 	public void pintar(int x,int y,int lado,Color color) {
 		try {
 			if(lado>1) {	
-				int[] rgbs=new int[lado];
 				
-				for(int i=0;i<lado;i++) {
-					rgbs[i]=color.getRGB();
+//				int[] rgbs=new int[lado];				
+//				for(int i=0;i<lado;i++) {
+//					rgbs[i]=color.getRGB();
+//				}
+//				imagen.setRGB(x, y, lado, lado, rgbs, 0, 0);
+				
+				for (int i = 0; i < lado; i++) {
+					for (int j = 0; j < lado; j++) {
+						imagen.setRGB(x+i, y+j, color.getRGB());
+					}
 				}
 				
-				imagen.setRGB(x, y, lado, lado, rgbs, 0, 0);
 				
 			}else
 				imagen.setRGB(x, y, color.getRGB());
