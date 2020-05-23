@@ -3,12 +3,20 @@ package quadTree;
 import java.awt.*;
 
 public class Nodo {
+	
+	
 
+//	@Override
+//	public String toString() {
+//		return hoja?"color: "+color.getRGB():"padre: nivel: "+nivelNodo(); 
+//	}
+	
 	@Override
 	public String toString() {
-		return hoja?"color: "+color.getRGB():"padre: nivel: "+nivelNodo(); 
+		return "Nodo = [Color=" + color + " - Nw=" + nw + " - Ne=" + ne + " - Se=" + se + " - Sw=" + sw + " - Padre=" + padre
+				+ " - Hoja=" + hoja + "]";
 	}
-	
+
 	private Color color;
 	private Nodo nw, ne, se, sw, padre;
 	private boolean hoja;
@@ -114,5 +122,11 @@ public class Nodo {
 		}
 
 		return nivel;
+	}
+	
+	public static void main(String[] args) {
+		Nodo n1=new Nodo(Color.RED);
+		
+		System.out.println(n1.toString());
 	}
 }
