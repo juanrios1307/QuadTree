@@ -68,19 +68,6 @@ public class Procesos extends JFrame{
 		return r;	
 	}
 	
-	public Color promedio(BufferedImage img) {
-		int r=0,g=0,b=0;
-		for(int i=1;i<3;i++) {
-			for(int j=1;j<3;j++) {
-				r+=new Color(img.getRGB(i, j)).getRed();
-				b+=new Color(img.getRGB(i, j)).getBlue();
-				g+=new Color(img.getRGB(i, j)).getGreen();
-			}
-		}
-		
-		return new Color(r/4,g/4,b/4);
-	}
-	
 	public void optimizacion(Nodo r) {
 		if(r.isHoja()) {
 			Nodo padre=r.getPadre();
@@ -95,6 +82,19 @@ public class Procesos extends JFrame{
 			optimizacion(r.getSw());
 			
 		}
+	}
+	
+	public Color promedio(BufferedImage img) {
+		int r=0,g=0,b=0;
+		for(int i=1;i<3;i++) {
+			for(int j=1;j<3;j++) {
+				r+=new Color(img.getRGB(i, j)).getRed();
+				b+=new Color(img.getRGB(i, j)).getBlue();
+				g+=new Color(img.getRGB(i, j)).getGreen();
+			}
+		}
+		
+		return new Color(r/4,g/4,b/4);
 	}
 	
 	public boolean iguales(Nodo r) {
