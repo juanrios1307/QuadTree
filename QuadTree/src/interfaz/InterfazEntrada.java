@@ -147,7 +147,15 @@ public class InterfazEntrada extends JFrame{
 	private void convertir(){
 		Procesos process=new Procesos();
 		
-		InterfazFigura figura=new InterfazFigura(process.arbolToImagen(process.imageToArbol(imagen)));
+		long inicio=System.currentTimeMillis();
+		QuadTree arbol=process.imageToArbol(imagen);
+		long fin=System.currentTimeMillis();
+		
+		System.out.println(fin-inicio);
+
+		BufferedImage img=process.arbolToImagen(arbol);
+		
+		InterfazFigura figura=new InterfazFigura(img);
 		figura.setVisible(true);
 		//this.setVisible(false);
 	}	
