@@ -16,7 +16,6 @@ public class Procesos extends JFrame {
 	public Procesos(Graphics G) {
 		this.G = G;
 	}
-
 	public Procesos() {
 	}
 
@@ -28,13 +27,11 @@ public class Procesos extends JFrame {
 
 		return arbol;
 	}
-
 	public Nodo imagenToArbol(BufferedImage img) {
 		Nodo root = new Nodo();
 
 		return imagenToArbol(img, root);
 	}
-
 	public Nodo imagenToArbol(BufferedImage img, Nodo r) {
 		if (img.getWidth() == 1) {
 
@@ -79,10 +76,51 @@ public class Procesos extends JFrame {
 		return r;
 	}
 
+	public QuadTree pene(QuadTree n) {
+		pene(n.getRoot());
+		return n;
+	}	
+	public void pene(Nodo n) {
+		if(n.isHoja()) {
+			Nodo padre=n.getPadre();
+			if(checkChildrenAreGay(padre)&&checkChildrenAreTrans(padre)) {			
+				padre.setColor(n.getColor());
+				suPapaSeFuePorCigarros(padre);
+			}
+			else {
+				System.out.println("ni chimba");
+			}
+		}
+		else {
+			pene(n.getNw());
+			pene(n.getNe());
+			pene(n.getSe());
+			pene(n.getSw());
+		}
+	}
+	
+	public void suPapaSeFuePorCigarros(Nodo n){
+		n.setNe(null);
+		n.setNw(null);
+		n.setSe(null);
+		n.setSw(null);
+	}
+	public boolean checkChildrenAreGay(Nodo n){
+		if(n.getNw().isHoja()&&n.getNe().isHoja()&&n.getSe().isHoja()&&n.getSw().isHoja()) {
+			return true;
+		}
+		return false;
+	}
+	public boolean checkChildrenAreTrans(Nodo n){
+		if(n.getNw().getColor()==n.getNe().getColor()&&n.getNe().getColor()==n.getSe().getColor()&&n.getSe().getColor()==n.getSw().getColor()) {
+			return true;
+		}
+		return false;
+	}
+	
 	public Color puntoMedio(BufferedImage img) {
 		return new Color(img.getRGB(img.getHeight() / 2, img.getWidth() / 2));
 	}
-
 	public Color puntosAzar(BufferedImage img) {
 		int r = 0, g = 0, b = 0;
 
@@ -98,7 +136,6 @@ public class Procesos extends JFrame {
 
 		return promColor;
 	}
-
 	public Color promedio(BufferedImage img) {
 		int r = 0, g = 0, b = 0;
 		for (int i = 0; i < img.getHeight(); i++) {
@@ -131,7 +168,6 @@ public class Procesos extends JFrame {
 		Graphics2D g = imagen.createGraphics();
 		return arbolToImagen(arbol.getRoot(), g, lado, 0, 0);
 	}
-
 	public BufferedImage arbolToImagen(Nodo n, Graphics2D g, int res, int x, int y) {
 		if (n.isHoja()) {
 			pintar(x, y, res, n.getColor());
