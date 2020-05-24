@@ -115,15 +115,12 @@ public class Procesos extends JFrame {
 	public BufferedImage nw(BufferedImage img) {
 		return img.getSubimage(0, 0, img.getWidth() / 2, img.getHeight() / 2);
 	}
-
 	public BufferedImage ne(BufferedImage img) {
 		return img.getSubimage(img.getWidth() / 2, 0, img.getWidth() / 2, img.getHeight() / 2);
 	}
-
 	public BufferedImage se(BufferedImage img) {
 		return img.getSubimage(img.getWidth() / 2, img.getHeight() / 2, img.getWidth() / 2, img.getHeight() / 2);
 	}
-
 	public BufferedImage sw(BufferedImage img) {
 		return img.getSubimage(0, img.getHeight() / 2, img.getWidth() / 2, img.getHeight() / 2);
 	}
