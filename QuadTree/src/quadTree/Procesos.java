@@ -42,7 +42,8 @@ public class Procesos extends JFrame {
 			Nodo hoja = new Nodo(new Color(img.getRGB(0, 0)));
 			return hoja;
 		} else {
-			if (img.getHeight() == lado * 0.015625) {
+			if (img.getHeight() <= lado*0.015625) {
+				
 //				Color nw = promedio(nw(img));
 //				Color ne = promedio(ne(img));
 //				Color se = promedio(sw(img));
@@ -59,8 +60,9 @@ public class Procesos extends JFrame {
 				Color sw = puntosAzar(sw(img));
 
 				if (nw.getRGB() == ne.getRGB() && ne.getRGB() == se.getRGB() && se.getRGB() == sw.getRGB()) {
-					// System.out.println("optimiza");
+					
 					return new Nodo(nw);
+					
 				} else {
 					r.setNw(imagenToArbol(nw(img)));
 					r.setNe(imagenToArbol(ne(img)));
@@ -99,8 +101,8 @@ public class Procesos extends JFrame {
 
 	public Color promedio(BufferedImage img) {
 		int r = 0, g = 0, b = 0;
-		for (int i = 1; i < 3; i++) {
-			for (int j = 1; j < 3; j++) {
+		for (int i = 0; i < img.getHeight(); i++) {
+			for (int j = 0; j < img.getHeight(); j++) {
 				r += new Color(img.getRGB(i, j)).getRed();
 				b += new Color(img.getRGB(i, j)).getBlue();
 				g += new Color(img.getRGB(i, j)).getGreen();

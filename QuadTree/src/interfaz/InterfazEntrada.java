@@ -151,7 +151,7 @@ public class InterfazEntrada extends JFrame{
 		QuadTree arbol=process.imageToArbol(imagen);
 		long fin=System.currentTimeMillis();
 		
-		System.out.println(fin-inicio);
+		System.out.println("time: "+(fin-inicio));
 
 		BufferedImage img=process.arbolToImagen(arbol);
 		
