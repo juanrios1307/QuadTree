@@ -13,8 +13,7 @@ public class Nodo {
 	
 	@Override
 	public String toString() {
-		return "Nodo = [Color=" + color + " - Nw=" + nw + " - Ne=" + ne + " - Se=" + se + " - Sw=" + sw + " - Padre=" + padre
-				+ " - Hoja=" + hoja + "]";
+		return hoja?"Color: "+color.getRGB():"Padre nivel: "+nivelNodo();
 	}
 
 	private Color color;

@@ -152,7 +152,10 @@ public class InterfazEntrada extends JFrame{
 		long fin=System.currentTimeMillis();
 		
 		System.out.println("time: "+(fin-inicio));
-
+		
+		System.out.println("altura:  "+arbol.getRoot().altura());
+		System.out.println("cantHoja: "+arbol.cantHojas());
+		
 		BufferedImage img=process.arbolToImagen(arbol);
 		
 		InterfazFigura figura=new InterfazFigura(img);

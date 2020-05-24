@@ -13,17 +13,17 @@ public class QuadTree {
 	}
 
 	public void recorrer() throws ExceptionNodo {
-		recorrer(root,".");
+		recorrer(root," ");
 	}
 	
 	public void recorrer(Nodo r,String append) throws ExceptionNodo{
 		if(!r.isHoja()){
 			System.out.println(append+r);
 				
-			recorrer(r.getNw(),append+append);
-			recorrer(r.getNe(),append+append);		
-			recorrer(r.getSe(),append+append);
-			recorrer(r.getSw(),append+append);
+			recorrer(r.getNw(),append+"  ");
+			recorrer(r.getNe(),append+"  ");		
+			recorrer(r.getSe(),append+"  ");
+			recorrer(r.getSw(),append+"  ");
 			
 		}else{
 			System.out.println(append+r);
