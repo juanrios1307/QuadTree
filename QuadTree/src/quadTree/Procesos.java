@@ -42,34 +42,34 @@ public class Procesos extends JFrame{
 			return hoja;
 		}
 		else {
-//			if(img.getHeight()==lado*0.015625) {
-////				Color nw = promedio(nw(img));
-////				Color ne = promedio(ne(img));
-////				Color se = promedio(sw(img));
-////				Color sw = promedio(sw(img));
-//				
-//				Color nw = puntoMedio(nw(img));
-//				Color ne = puntoMedio(ne(img));
-//				Color se = puntoMedio(sw(img));
-//				Color sw = puntoMedio(sw(img));
-//				
-//				
-//				if(nw.getRGB()==ne.getRGB()&&ne.getRGB()==se.getRGB()&&se.getRGB()==sw.getRGB()){
-//					//System.out.println("opimiza");
-//					return new Nodo(nw);
-//				}
-//				else {
-//					r.setNw(imagenToArbol(nw(img)));
-//					r.setNe(imagenToArbol(ne(img)));
-//					r.setSe(imagenToArbol(se(img)));
-//					r.setSw(imagenToArbol(sw(img)));
-//				}
-//			}else {
+			if(img.getHeight()==lado*0.015625) {
+//				Color nw = promedio(nw(img));
+//				Color ne = promedio(ne(img));
+//				Color se = promedio(sw(img));
+//				Color sw = promedio(sw(img));
+				
+				Color nw = puntoMedio(nw(img));
+				Color ne = puntoMedio(ne(img));
+				Color se = puntoMedio(sw(img));
+				Color sw = puntoMedio(sw(img));
+				
+				
+				if(nw.getRGB()==ne.getRGB()&&ne.getRGB()==se.getRGB()&&se.getRGB()==sw.getRGB()){
+					//System.out.println("opimiza");
+					return new Nodo(nw);
+				}
+				else {
+					r.setNw(imagenToArbol(nw(img)));
+					r.setNe(imagenToArbol(ne(img)));
+					r.setSe(imagenToArbol(se(img)));
+					r.setSw(imagenToArbol(sw(img)));
+				}
+			}else {
 				r.setNw(imagenToArbol(nw(img)));
 				r.setNe(imagenToArbol(ne(img)));
 				r.setSe(imagenToArbol(se(img)));
 				r.setSw(imagenToArbol(sw(img)));
-			//}
+			}
 		}
 		return r;	
 	}
