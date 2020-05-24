@@ -41,7 +41,7 @@ public class InterfazEntrada extends JFrame{
 		imagenO.setVerticalAlignment(SwingConstants.TOP);
 		
 		JLabel lblAltura = new JLabel("Altura:");
-		JLabel lblPixeles = new JLabel("TamaÒo:");
+		JLabel lblPixeles = new JLabel("Tama√±o:");
 		JLabel lblPotencia = new JLabel("Potencia:");
 		
 		JButton btnConvertir = new JButton("Convertir imagen");
@@ -49,12 +49,7 @@ public class InterfazEntrada extends JFrame{
 		btnConvertir.setBounds(326, 24, 139, 25);
 		btnConvertir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					convertir(imagen);
-				} catch (ExceptionNodo e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+					convertir();
 			}
 		});
 		
@@ -66,10 +61,10 @@ public class InterfazEntrada extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				if(isCuadrada(imagen) && potenciaDos(imagen)==true) {
 					btnConvertir.setEnabled(true);
-					JOptionPane.showMessageDialog(null, "La imagen sÌ cumple", "OK", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "La imagen s√≠ cumple", "OK", JOptionPane.INFORMATION_MESSAGE);
 				}else {
 					btnConvertir.setEnabled(false);
-					JOptionPane.showMessageDialog(null, "La imagen no es cuadrada o no es potencia de 2, por favor ingrese una imagen v·lida",
+					JOptionPane.showMessageDialog(null, "La imagen no es cuadrada o no es potencia de 2, por favor ingrese una imagen v√°lida",
 							"Error", JOptionPane.ERROR_MESSAGE);
 					}
 			}
@@ -88,8 +83,8 @@ public class InterfazEntrada extends JFrame{
 					setBounds(400,100,imagen.getWidth()+370,imagen.getHeight()+180);
 					btnConvertir.setEnabled(false);
 					btnVerificar.setEnabled(true);
-					lblAltura.setText("Altura: "+imagen.getHeight()+" pÌxeles");
-					lblPixeles.setText("TamaÒo: "+(imagen.getHeight()*imagen.getWidth())+" pÌxeles");
+					lblAltura.setText("Altura: "+imagen.getHeight()+" p√≠xeles");
+					lblPixeles.setText("Tama√±o: "+(imagen.getHeight()*imagen.getWidth())+" p√≠xeles");
 					lblPotencia.setText("Potencia de 2: "+ log(imagen.getHeight(),2));
 					lblAltura.setBounds(imagen.getWidth()+50, 80, 207, 35);
 					lblPixeles.setBounds(imagen.getWidth()+50, 128, 207, 25);
@@ -129,11 +124,10 @@ public class InterfazEntrada extends JFrame{
 	//Metodo verificar imagen cuadrada
 	
 	public boolean isCuadrada(BufferedImage img) {
-		boolean cuadrada = false;
 		if(img.getWidth()==img.getHeight()) {
-			cuadrada = true;
+			return true;
 		}
-		return cuadrada;
+		return false;
 	}
 	
 	//Metodo verificar que los bits de la imagen sean potencia de 2
@@ -147,19 +141,13 @@ public class InterfazEntrada extends JFrame{
 	
 	private static Double log(double num, int base) {
 	      return (Math.log10(num) / Math.log10(base));
-	   }
-	
-	
-	//Metodo Convertir 
-	
-	private void convertir(BufferedImage img) throws ExceptionNodo{
-		ProcesosArbol process=new ProcesosArbol();
-		
-		convertir(process.imagenToArbol(img));
 	}
 	
-	private void convertir(QuadTree arbol) throws ExceptionNodo {
-		InterfazFigura figura=new InterfazFigura(new ProcesosArbol().arbolToImagen(arbol));
+	
+	private void convertir(){
+		Procesos process=new Procesos();
+		
+		InterfazFigura figura=new InterfazFigura(process.arbolToImagen(process.imageToArbol(imagen)));
 		figura.setVisible(true);
 		//this.setVisible(false);
 	}	

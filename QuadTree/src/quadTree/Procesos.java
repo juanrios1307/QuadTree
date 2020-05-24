@@ -42,7 +42,7 @@ public class Procesos extends JFrame{
 			return hoja;
 		}
 		else {
-			if(img.getHeight()==lado*0.015625) {
+			if(img.getHeight()==16) {
 //				Color nw = promedio(nw(img));
 //				Color ne = promedio(ne(img));
 //				Color se = promedio(sw(img));
@@ -57,8 +57,7 @@ public class Procesos extends JFrame{
 				if(nw.getRGB()==ne.getRGB()&&ne.getRGB()==se.getRGB()&&se.getRGB()==sw.getRGB()){
 					//System.out.println("opimiza");
 					return new Nodo(nw);
-				}
-				else {
+				}else {
 					r.setNw(imagenToArbol(nw(img)));
 					r.setNe(imagenToArbol(ne(img)));
 					r.setSe(imagenToArbol(se(img)));
