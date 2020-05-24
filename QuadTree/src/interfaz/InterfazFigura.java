@@ -14,7 +14,7 @@ public class InterfazFigura extends JFrame {
     BufferedImage img;
  
     public InterfazFigura(BufferedImage img) {
-    	 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	 setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
          contentPane = new JPanel();
          contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
          setContentPane(contentPane);
