@@ -75,7 +75,6 @@ public class Procesos extends JFrame {
 	
 	public Color puntosAzar(BufferedImage img) {
 		int r = 0, g = 0, b = 0;
-
 		Color promColor;
 		for (int i = 0; i < 5; i++) {
 			int x = (int) (Math.random() * img.getHeight());
@@ -85,7 +84,6 @@ public class Procesos extends JFrame {
 			g += new Color(img.getRGB(x, y)).getGreen();
 		}
 		promColor = new Color(r / 5, g / 5, b / 5);
-
 		return promColor;
 	}
 	
@@ -98,7 +96,6 @@ public class Procesos extends JFrame {
 				g += new Color(img.getRGB(i, j)).getGreen();
 			}
 		}
-
 		return new Color(r / 4, g / 4, b / 4);
 	}
 
@@ -116,7 +113,6 @@ public class Procesos extends JFrame {
 	}
 
 	public BufferedImage arbolToImagen(QuadTree arbol) {
-
 		imagen = new BufferedImage(lado, lado, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = imagen.createGraphics();
 		return arbolToImagen(arbol.getRoot(), g, lado, 0, 0);
@@ -126,18 +122,13 @@ public class Procesos extends JFrame {
 		if (n.isHoja()) {
 			pintar(x, y, res, n.getColor());
 		} else {
-
 			arbolToImagen(n.getNw(), g, res / 2, x, y);
-
 			x += res / 2;
 			arbolToImagen(n.getNe(), g, res / 2, x, y);
-
 			y += res / 2;
 			arbolToImagen(n.getSe(), g, res / 2, x, y);
-
 			x -= res / 2;
 			arbolToImagen(n.getSw(), g, res / 2, x, y);
-
 		}
 		return imagen;
 	}
@@ -155,7 +146,6 @@ public class Procesos extends JFrame {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 }
