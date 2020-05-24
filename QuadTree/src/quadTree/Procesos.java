@@ -42,47 +42,42 @@ public class Procesos extends JFrame{
 			return hoja;
 		}
 		else {
-			if(img.getHeight()==8) {
-				Color nw = promedio(nw(img));
-				Color ne = promedio(ne(img));
-				Color se = promedio(sw(img));
-				Color sw = promedio(sw(img));
-				
-				if(nw==ne&&ne==se&&se==sw){
-					return new Nodo(nw);
-				}
-				else {
-					r.setNw(imagenToArbol(nw(img)));
-					r.setNe(imagenToArbol(ne(img)));
-					r.setSe(imagenToArbol(se(img)));
-					r.setSw(imagenToArbol(sw(img)));
-				}
-			}
-			else {
-			r.setNw(imagenToArbol(nw(img)));
-			r.setNe(imagenToArbol(ne(img)));
-			r.setSe(imagenToArbol(se(img)));
-			r.setSw(imagenToArbol(sw(img)));
-			}
+//			if(img.getHeight()==lado*0.015625) {
+////				Color nw = promedio(nw(img));
+////				Color ne = promedio(ne(img));
+////				Color se = promedio(sw(img));
+////				Color sw = promedio(sw(img));
+//				
+//				Color nw = puntoMedio(nw(img));
+//				Color ne = puntoMedio(ne(img));
+//				Color se = puntoMedio(sw(img));
+//				Color sw = puntoMedio(sw(img));
+//				
+//				
+//				if(nw.getRGB()==ne.getRGB()&&ne.getRGB()==se.getRGB()&&se.getRGB()==sw.getRGB()){
+//					//System.out.println("opimiza");
+//					return new Nodo(nw);
+//				}
+//				else {
+//					r.setNw(imagenToArbol(nw(img)));
+//					r.setNe(imagenToArbol(ne(img)));
+//					r.setSe(imagenToArbol(se(img)));
+//					r.setSw(imagenToArbol(sw(img)));
+//				}
+//			}else {
+				r.setNw(imagenToArbol(nw(img)));
+				r.setNe(imagenToArbol(ne(img)));
+				r.setSe(imagenToArbol(se(img)));
+				r.setSw(imagenToArbol(sw(img)));
+			//}
 		}
 		return r;	
 	}
 	
-	public void optimizacion(Nodo r) {
-		if(r.isHoja()) {
-			Nodo padre=r.getPadre();
-			if(iguales(padre)) {
-				padre.setColor(r.getColor());
-			}
-			
-		}else {
-			optimizacion(r.getNw());
-			optimizacion(r.getNe());
-			optimizacion(r.getSe());
-			optimizacion(r.getSw());
-			
-		}
+	public Color puntoMedio(BufferedImage img) {
+		return new Color(img.getRGB(img.getHeight()/2, img.getWidth()/2));
 	}
+	
 	
 	public Color promedio(BufferedImage img) {
 		int r=0,g=0,b=0;
@@ -96,23 +91,7 @@ public class Procesos extends JFrame{
 		
 		return new Color(r/4,g/4,b/4);
 	}
-	
-	public boolean iguales(Nodo r) {
-		Nodo nw=r.getNw();
-		Nodo ne=r.getNe();
-		Nodo sw=r.getSw();
-		Nodo se=r.getSe();
-		if((nw.isHoja())&& ne.isHoja() && se.isHoja() && sw.isHoja()&&
-			nw.getColor().equals(ne.getColor()) &&
-			nw.getColor().equals(se.getColor()) &&
-			nw.getColor().equals(sw.getColor()) &&
-			ne.getColor().equals(se.getColor()) &&
-			ne.getColor().equals(sw.getColor()) &&
-			se.getColor().equals(sw.getColor()) ) {
-			return true;
-		}else
-			return false;
-	}
+
 
 	public BufferedImage nw(BufferedImage img){
 		return img.getSubimage(0, 0, img.getWidth()/2, img.getHeight()/2);
