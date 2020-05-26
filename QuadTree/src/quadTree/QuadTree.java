@@ -3,11 +3,11 @@ package quadTree;
 public class QuadTree {
 	
 	private Nodo root;
-	
+
 	public QuadTree(Nodo root) {
 		this.root=root;
 	}
-	
+
 	public Nodo getRoot() {	
 		return root;
 	}

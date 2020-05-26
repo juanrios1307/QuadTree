@@ -4,25 +4,23 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
 public class Procesos extends JFrame {
 
-	Graphics G;
+	
 	int lado = 1;
 	BufferedImage imagen;
 
-	public Procesos(Graphics G) {
-		this.G = G;
-	}
 	public Procesos() {
+	
 	}
-
+	
 	public QuadTree imageToArbol(BufferedImage img) {
 		lado = img.getHeight();
-		QuadTree arbol = new QuadTree(imagenToArbol(img));
-		return arbol;
+		return new QuadTree(imagenToArbol(img));
 	}
 	public Nodo imagenToArbol(BufferedImage img) {
 		Nodo root = new Nodo();
@@ -75,16 +73,15 @@ public class Procesos extends JFrame {
 	
 	public Color puntosAzar(BufferedImage img) {
 		int r = 0, g = 0, b = 0;
-		Color promColor;
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < img.getHeight(); i++) {
 			int x = (int) (Math.random() * img.getHeight());
 			int y = (int) (Math.random() * img.getHeight());
 			r += new Color(img.getRGB(x, y)).getRed();
 			b += new Color(img.getRGB(x, y)).getBlue();
 			g += new Color(img.getRGB(x, y)).getGreen();
 		}
-		promColor = new Color(r / 5, g / 5, b / 5);
-		return promColor;
+		//return new Color(r /5, g /5, b /5);
+		return new Color(r/img.getHeight(), g/img.getHeight() , b/img.getHeight());
 	}
 	
 	public Color promedio(BufferedImage img) {
@@ -114,21 +111,20 @@ public class Procesos extends JFrame {
 
 	public BufferedImage arbolToImagen(QuadTree arbol) {
 		imagen = new BufferedImage(lado, lado, BufferedImage.TYPE_INT_RGB);
-		Graphics2D g = imagen.createGraphics();
-		return arbolToImagen(arbol.getRoot(), g, lado, 0, 0);
+		return arbolToImagen(arbol.getRoot(), lado, 0, 0);
 	}
 	
-	public BufferedImage arbolToImagen(Nodo n, Graphics2D g, int res, int x, int y) {
+	public BufferedImage arbolToImagen(Nodo n, int res, int x, int y) {
 		if (n.isHoja()) {
 			pintar(x, y, res, n.getColor());
 		} else {
-			arbolToImagen(n.getNw(), g, res / 2, x, y);
+			arbolToImagen(n.getNw(), res / 2, x, y);
 			x += res / 2;
-			arbolToImagen(n.getNe(), g, res / 2, x, y);
+			arbolToImagen(n.getNe(), res / 2, x, y);
 			y += res / 2;
-			arbolToImagen(n.getSe(), g, res / 2, x, y);
+			arbolToImagen(n.getSe(), res / 2, x, y);
 			x -= res / 2;
-			arbolToImagen(n.getSw(), g, res / 2, x, y);
+			arbolToImagen(n.getSw(), res / 2, x, y);
 		}
 		return imagen;
 	}
