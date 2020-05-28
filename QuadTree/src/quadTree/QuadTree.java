@@ -12,11 +12,11 @@ public class QuadTree {
 		return root;
 	}
 
-	public void recorrer() throws ExceptionNodo {
+	public void recorrer() {
 		recorrer(root," ");
 	}
 	
-	public void recorrer(Nodo r,String append) throws ExceptionNodo{
+	public void recorrer(Nodo r,String append){
 		if(!r.isHoja()){
 			System.out.println(append+r);
 				
