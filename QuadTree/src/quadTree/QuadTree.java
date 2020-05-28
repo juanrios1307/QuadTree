@@ -45,9 +45,11 @@ public class QuadTree {
             return 1;
         }else {
             return cantHojas(n.getNw())+cantHojas(n.getNe())+cantHojas(n.getSw())+cantHojas(n.getSe());
-        }
-        
-            
+        }     
+    }
+    
+    public int altura() {
+    	return root.altura();
     }
 	
 }
