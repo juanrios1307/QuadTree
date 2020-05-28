@@ -86,14 +86,15 @@ public class Procesos extends JFrame {
 	
 	public Color promedio(BufferedImage img) {
 		int r = 0, g = 0, b = 0;
-		for (int i = 0; i < img.getHeight(); i++) {
-			for (int j = 0; j < img.getHeight(); j++) {
+		int l=img.getHeight();
+		for (int i = 0; i < l; i++) {
+			for (int j = 0; j < l; j++) {
 				r += new Color(img.getRGB(i, j)).getRed();
 				b += new Color(img.getRGB(i, j)).getBlue();
 				g += new Color(img.getRGB(i, j)).getGreen();
 			}
 		}
-		return new Color(r / 4, g / 4, b / 4);
+		return new Color(r / (int)Math.pow(l, 2), g /(int)Math.pow(l, 2), b /(int)Math.pow(l, 2));
 	}
 
 	public BufferedImage nw(BufferedImage img) {
